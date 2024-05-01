@@ -1,0 +1,6 @@
+bot.sendMessage(chatId, "🌟 Welcome to @ImgJourneyBot! 🌟\n\nI'm here to create magical images using prompts. Just send me a prompt, and I'll craft a unique image based on it. Let's embark on an image journey together! 🖼️\n\nJoin @SopBots to request new features or suggest new bots. We're always eager to hear from you! 🚀");
+
+
+https://nextbot.onrender.com
+
+
