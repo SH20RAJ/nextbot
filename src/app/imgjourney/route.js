@@ -11,6 +11,13 @@ const bot = new TelegramBot(token);
 
 export const POST = async (req, res, next) => {
     let data = await req.json();
+    fetch("https://wh.manychat.com/tgwh/tg0o83f4yg73hfgi73f2g89938g/6564625956/3cb9c43b300de42ccc337cc7d8b3e455ceef7d73",{
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data)
+    })
     const message = data.message;
     console.log(message);
     const chatId = message.chat.id;
