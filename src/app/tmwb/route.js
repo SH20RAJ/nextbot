@@ -37,8 +37,12 @@ export const POST = async (req, res, next) => {
     } else {
         // let loaderMessage  = await bot.sendMessage(chatId, 'Processing your Image...');
         bot.sendChatAction(chatId, 'typing');
+        if(imdbId){
+            bot.sendMessage(chatId, 'https://vidsrc.to/embed/movie/'+imdbId);
+        } else {
+            bot.sendMessage(chatId, "Try or Request more bots on @sopbots 🚀");
+        }
 
-        bot.sendMessage(chatId, 'https://vidsrc.to/embed/movie/'+imdbId);
     }
 
     return Response.json({
