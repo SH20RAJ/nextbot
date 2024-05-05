@@ -58,7 +58,7 @@ export const POST = async (req, res, next) => {
                     [
                         {
                             text: 'Watch Here',
-                            url: `https://vidsrc.to/embed/movie/${imdbId}`
+                            url: `https://vidsrc.net/embed/${imdbId}`
                         }
                     ]
                 ]
