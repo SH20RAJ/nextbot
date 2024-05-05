@@ -18,7 +18,7 @@ export const POST = async (req, res, next) => {
     const match = stringdata.match(regex);
     const imdbId = match ? match[1] : null;
 
-    const imdbPoster  = stringdata.match('https:\/\/m\.media-amazon\.com\/images\/[^"]+\.jpg')[0]
+    // const imdbPoster  = stringdata.match('https:\/\/m\.media-amazon\.com\/images\/[^"]+\.jpg')[0]
     
     console.log(imdbId); 
 
@@ -58,8 +58,14 @@ export const POST = async (req, res, next) => {
             };
         
             // Send a message with the inline keyboard and the image
-            bot.sendPhoto(chatId, imdbPoster, {
-                caption: '',
+            // bot.sendPhoto(chatId, imdbPoster, {
+            //     caption: '<a href="https://www.imdb.com/title/'+imdbId+'">IMDB</a>',
+            //     parse_mode: 'HTML',
+            //     reply_markup: JSON.stringify(keyboard)
+            // });
+
+            bot.sendMessage(chatId, '<a href="https://www.imdb.com/title/'+imdbId+'">IMDB</a>', {
+                parse_mode: 'HTML',
                 reply_markup: JSON.stringify(keyboard)
             });
 
