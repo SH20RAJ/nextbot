@@ -33,7 +33,7 @@ export const POST = async (req, res, next) => {
     if (textContent === 'hi') {
         bot.sendMessage(chatId, 'Hello!');
     } else if(textContent == "/start"){
-        bot.sendMessage(chatId, "🌟 Welcome to @ImgJourneyBot! 🌟\n\nI'm here to create magical images using prompts. Just send me a prompt, and I'll craft a unique image based on it. Let's embark on an image journey together! 🖼️\n\nJoin @SopBots to request new features or suggest new bots. We're always eager to hear from you! 🚀");
+        bot.sendMessage(chatId, "🌟 Welcome to @tmwbbot! 🌟\n\nSend me an IMDB link I will send you the stream URL or Type @imdbot then `space` then type the name of the movie then click on it to send 🚀");
     } else {
         // let loaderMessage  = await bot.sendMessage(chatId, 'Processing your Image...');
         bot.sendChatAction(chatId, 'typing');
