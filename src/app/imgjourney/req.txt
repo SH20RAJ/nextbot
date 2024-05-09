@@ -4,3 +4,6 @@ bot.sendMessage(chatId, "🌟 Welcome to @ImgJourneyBot! 🌟\n\nI'm here to cre
 https://nextbot.onrender.com
 
 
+https://nextbot2.netlify.app/
+
+
