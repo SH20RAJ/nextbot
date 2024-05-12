@@ -6,7 +6,7 @@ const token = process.env.IMGJOURNEYBOT;
 const bot = new TelegramBot(token);
 
 
-export const runtime = "edge";
+export const runtime = "experimental-edge";
 
 
 
