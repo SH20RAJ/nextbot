@@ -4,6 +4,7 @@ const TelegramBot = require('node-telegram-bot-api');
 
 const token = process.env.TMWB;
 const bot = new TelegramBot(token);
+export const runtime = "edge";
 
 
 
