@@ -1,6 +1,5 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-.env*
 # dependencies
 /node_modules
 /.pnp
@@ -9,7 +8,7 @@
 
 # testing
 /coverage
-my-next-app
+
 # next.js
 /.next/
 /out/
@@ -35,4 +34,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
-curl.md
+
+# wrangler files
+.wrangler
+.dev.vars

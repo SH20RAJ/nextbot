@@ -1,5 +1,5 @@
 {
-  "name": "nextbot",
+  "name": "nextbotcf",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -7,18 +7,25 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "pages:build": "npx @cloudflare/next-on-pages"
+    "pages:build": "npx @cloudflare/next-on-pages",
+    "preview": "npm run pages:build && wrangler pages dev",
+    "deploy": "npm run pages:build && wrangler pages deploy"
   },
   "dependencies": {
-    "@cloudflare/next-on-pages": "^1.11.3",
-    "next": "14.2.3",
-    "node-telegram-bot-api": "^0.65.1",
+    "next": "14.1.0",
     "react": "^18",
-    "react-dom": "^18",
-    "telegraf": "^4.16.3"
+    "react-dom": "^18"
   },
   "devDependencies": {
+    "@cloudflare/next-on-pages": "^1.11.3",
+    "@cloudflare/workers-types": "^4.20240502.0",
+    "autoprefixer": "^10.0.1",
+    "eslint": "^8",
+    "eslint-config-next": "14.1.0",
+    "eslint-plugin-next-on-pages": "^1.11.3",
     "postcss": "^8",
-    "tailwindcss": "^3.4.1"
+    "tailwindcss": "^3.3.0",
+    "vercel": "^34.1.11",
+    "wrangler": "^3.55.0"
   }
 }
