@@ -13,10 +13,8 @@
   },
   "dependencies": {
     "next": "14.1.0",
-    "node-telegram-bot-api": "^0.65.1",
     "react": "^18",
-    "react-dom": "^18",
-    "telegraf": "^4.16.3"
+    "react-dom": "^18"
   },
   "devDependencies": {
     "@cloudflare/next-on-pages": "^1.11.3",
