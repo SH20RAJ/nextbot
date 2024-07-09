@@ -87,7 +87,7 @@ export async function POST(req) {
 
           if (data.success && data.list.length > 0) {
             const fileInfo = data.list[0];
-            const msgTemplate = `<b>Share this bot to keep this bot Working</b>\n<b>File Name:</b> ${fileInfo.fileName}\nOriginal Link: ${url}\n<b>File Size:</b> ${fileInfo.fileSize}\n<b>Uploaded At:</b> ${fileInfo.uploadedAt}\n <b>Download Link:</b> <a href="${fileInfo.downloadLink}">Download</a>\n <b>Watch Link:</b> <a href="https://teradl.shraj.workers.dev/?url=${encodeURIComponent(fileInfo.downloadLink)}">Watch</a>`;
+            const msgTemplate = `<b>Share this bot to keep this bot Working and Join @sopbots</b>\n<b>File Name:</b> ${fileInfo.fileName}\nOriginal Link: ${url}\n<b>File Size:</b> ${fileInfo.fileSize}\n<b>Uploaded At:</b> ${fileInfo.uploadedAt}\n <b>Download Link:</b> <a href="${fileInfo.downloadLink}">Download</a>\n <b>Watch Link:</b> <a href="https://teradl.shraj.workers.dev/?url=${encodeURIComponent(fileInfo.downloadLink)}">Watch</a>`;
             const options = {
               parse_mode: "HTML",
               reply_markup: {
