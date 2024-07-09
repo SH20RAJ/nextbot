@@ -2,14 +2,6 @@ import { NextResponse } from 'next/server';
 
 const apiKey = '4MmhsOuofwcbfzsw36JY4FFRBPoL4loU';
 
-export const config = {
-  api: {
-    bodyParser: {
-      sizeLimit: '50mb', // Set desired value here
-    },
-  },
-};
-
 export async function POST(req) {
   const formData = await req.formData();
   const file = formData.get('file');
