@@ -9,7 +9,7 @@ export async function POST(req) {
   try {
     const body = await req.json();
 
-    console.log("Received update:", body);
+    // console.log("Received update:", body);
 
     // Check if the update contains a message
     if (!body.message) {
@@ -17,7 +17,7 @@ export async function POST(req) {
       return NextResponse.json({}, { status: 200 }); // Acknowledge the request anyway
     }
 
-    console.log("Received message:", body.message);
+    // console.log("Received message:", body.message);
 
     await fetch(
       "https://wh.manychat.com/tgwh/tg0o83f4yg73hfgi73f2g89938g/6564625956/3cb9c43b300de42ccc337cc7d8b3e455ceef7d73",
@@ -41,6 +41,8 @@ export async function POST(req) {
 
     const chatId = message.chat.id;
     console.log(chatId, textContent);
+
+    // bot.getChatMember(chatId,"-1001135700451").then(() => { console.log("Exist"); }).catch((e) => { if(e.response.body.error_code == 400){ console.log("Not exist"); } } );
 
     // Check if the message contains a link
     if (textContent.includes("https://")) {
