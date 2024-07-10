@@ -107,6 +107,23 @@ export async function POST(req) {
               },
             };
             bot.sendMessage(chatId, msgTemplate, options);
+
+          
+        try {
+          let video = await fetch("https://imagehippoo.shraj.workers.dev/?url=" + fileInfo.fastDownloadLink);
+          let videoData = await video.json();
+          // bot.sendChatAction(chatId, "upload_video");
+          // bot.sendVideo(chatId, videoData.video, { caption: videoData.caption });
+          bot.sendMessage(chatId, videoData.data.view_url);
+        }
+        catch (error) {
+          console.error("Error:", error);
+          bot.sendMessage(
+            chatId,
+            "An error occurred while processing your request of Permanent URL under 50 MB"
+          );
+        }
+          
           } else {
             bot.sendMessage(chatId, "No download links found.");
           }
@@ -117,6 +134,8 @@ export async function POST(req) {
             "An error occurred while processing your request"
           );
         }
+
+
       }
     } else if (textContent === "hi") {
       // Send "Hi" as a response

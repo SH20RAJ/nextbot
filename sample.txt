@@ -1,0 +1,5 @@
+curl -F "url=https://ad71-2401-4900-7427-ca59-6187-ec78-aba8-3106.ngrok-free.app/uploadhippobot" https://api.telegram.org/bot7121724020:AAGydAdtbb2gyX1LniuM5_c16qKNNh2bvqE/setWebhook
+
+
+
+curl https://api.telegram.org/bot7121724020:AAGydAdtbb2gyX1LniuM5_c16qKNNh2bvqE/getWebhookInfo
