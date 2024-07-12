@@ -149,7 +149,7 @@ export async function POST(req) {
               console.error("Error:", error);
               bot.sendMessage(
                 chatId,
-                "An error occurred while processing your request of Permanent URL under 50 MB"
+                "An error occurred while processing your request of Permanent URL under 50 MB \n See Logs Here :- https://t.me/+l6rpLkO0xvMwZTJl"
               );
               // bot.sendMessage(chatId, fileInfo.downloadLink);
               bot.sendMessage(chatId, fileInfo.fastDownloadLink);
