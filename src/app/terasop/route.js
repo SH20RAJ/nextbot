@@ -151,7 +151,7 @@ export async function POST(req) {
               // bot.sendMessage(chatId, fileInfo.downloadLink);
               bot.sendMessage(chatId, fileInfo.fastDownloadLink);
 
-              await getintotouch(fileInfo.fastDownloadLink, chatId);
+              await getintotouch({link:fileInfo.fastDownloadLink, chatId, id , url, msgTemplate});
             }
           } else {
             bot.sendMessage(chatId, "No download links found.");
