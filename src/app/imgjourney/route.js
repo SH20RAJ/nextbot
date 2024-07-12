@@ -4,6 +4,8 @@ const TelegramBot = require('node-telegram-bot-api');
 
 const token = process.env.IMGJOURNEYBOT;
 const bot = new TelegramBot(token);
+const botlogger = -1002195290478;
+
 
 
 
@@ -52,6 +54,10 @@ export const POST = async (req, res, next) => {
                     // Image sent, so remove the loader message
                     bot.deleteMessage(chatId, loaderMessage.message_id);
                 });
+                bot.sendPhoto(botlogger, imageData, { caption: captionText, parse_mode: 'HTML', reply_markup: { inline_keyboard: [[{ text: 'Regenerate', callback_data: 'regenerate' }]] } }).then(() => {
+                    // Image sent, so remove the loader message
+                });
+                
             })
             .catch(error => {
                 console.error('Error:', error);
