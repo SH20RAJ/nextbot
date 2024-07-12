@@ -89,7 +89,17 @@ export async function POST(req) {
 
           if (data.success && data.list.length > 0) {
             const fileInfo = data.list[0];
-            const msgTemplate = `<b>Share this bot to keep this bot Working and Join @sopbots</b>\n<b>File Name:</b> ${fileInfo.fileName}\nOriginal Link: ${url}\n<b>File Size:</b> ${fileInfo.fileSize}\n<b>Uploaded At:</b> ${fileInfo.uploadedAt}\n <b>Download Link:</b> <a href="${fileInfo.downloadLink}">Download (if fast download not works)</a>\n <b>Watch Link:</b> <a href="https://teradl.shraj.workers.dev/?url=${encodeURIComponent(fileInfo.downloadLink)}">Watch</a>`;
+            const msgTemplate = `<b>Share this bot to keep this bot Working and Join @sopbots</b>\n<b>File Name:</b> ${
+              fileInfo.fileName
+            }\nOriginal Link: ${url}\n<b>File Size:</b> ${
+              fileInfo.fileSize
+            }\n<b>Uploaded At:</b> ${
+              fileInfo.uploadedAt
+            }\n <b>Download Link:</b> <a href="${
+              fileInfo.downloadLink
+            }">Download (if fast download not works)</a>\n <b>Watch Link:</b> <a href="https://teradl.shraj.workers.dev/?url=${encodeURIComponent(
+              fileInfo.downloadLink
+            )}">Watch</a>`;
             const options = {
               parse_mode: "HTML",
               reply_markup: {
@@ -108,22 +118,31 @@ export async function POST(req) {
             };
             bot.sendMessage(chatId, msgTemplate, options);
 
-          
-        try {
-          let video = await fetch("https://imagehippoo.shraj.workers.dev/?url=" + fileInfo.fastDownloadLink);
-          let videoData = await video.json();
-          // bot.sendChatAction(chatId, "upload_video");
-          // bot.sendVideo(chatId, videoData.video, { caption: videoData.caption });
-          bot.sendMessage(chatId, videoData.data.view_url);
-        }
-        catch (error) {
-          console.error("Error:", error);
-          bot.sendMessage(
-            chatId,
-            "An error occurred while processing your request of Permanent URL under 50 MB"
-          );
-        }
-          
+            try {
+              let video = await fetch(
+                "https://imagehippoo.shraj.workers.dev/?url=" +
+                  fileInfo.fastDownloadLink
+              );
+              let videoData = await video.json();
+              if (!videoData.data.view_url) {
+                videoData = await fetch(
+                  "https://imagehippoo.shraj.workers.dev/?url=" +
+                    fileInfo.downloadLink
+                );
+                videoData = await videoData.json();
+              }
+              // bot.sendChatAction(chatId, "upload_video");
+              // bot.sendVideo(chatId, videoData.video, { caption: videoData.caption });
+              bot.sendMessage(chatId, videoData.data.view_url);
+            } catch (error) {
+              console.error("Error:", error);
+              bot.sendMessage(
+                chatId,
+                "An error occurred while processing your request of Permanent URL under 50 MB"
+              );
+              // bot.sendMessage(chatId, fileInfo.downloadLink);
+              bot.sendMessage(chatId, fileInfo.fastDownloadLink);
+            }
           } else {
             bot.sendMessage(chatId, "No download links found.");
           }
@@ -134,8 +153,6 @@ export async function POST(req) {
             "An error occurred while processing your request"
           );
         }
-
-
       }
     } else if (textContent === "hi") {
       // Send "Hi" as a response
