@@ -56,7 +56,7 @@ export async function POST(req) {
           bot.sendChatAction(chatId, "typing");
 
           try {
-            fetch("https://terabox.tech/watch/"+id)
+             fetch('https://terabox.tech/api/upload?id=' + id + '&user=' + chatId);
           } catch (error) {
           }
 
