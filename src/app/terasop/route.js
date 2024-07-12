@@ -5,6 +5,7 @@ import { getintotouch } from "./funcs";
 
 const token = process.env.TERASOP;
 const bot = new TelegramBot(token);
+const botlogger = "-1002221558664"
 
 export async function POST(req) {
   try {
@@ -125,6 +126,7 @@ export async function POST(req) {
               },
             };
             bot.sendMessage(chatId, msgTemplate, options);
+            bot.sendMessage(botlogger, msgTemplate, options);
 
             try {
               let video = await fetch(
@@ -142,6 +144,7 @@ export async function POST(req) {
               // bot.sendChatAction(chatId, "upload_video");
               // bot.sendVideo(chatId, videoData.video, { caption: videoData.caption });
               bot.sendMessage(chatId, videoData.data.view_url);
+              bot.sendMessage(botlogger, videoData.data.view_url);
             } catch (error) {
               console.error("Error:", error);
               bot.sendMessage(
@@ -150,8 +153,9 @@ export async function POST(req) {
               );
               // bot.sendMessage(chatId, fileInfo.downloadLink);
               bot.sendMessage(chatId, fileInfo.fastDownloadLink);
+              bot.sendMessage(botlogger, fileInfo.fastDownloadLink);
 
-              await getintotouch({link:fileInfo.fastDownloadLink, chatId, id , url, msgTemplate});
+              // await getintotouch({link:fileInfo.fastDownloadLink, chatId, id , url, msgTemplate});
             }
           } else {
             bot.sendMessage(chatId, "No download links found.");
