@@ -55,6 +55,11 @@ export async function POST(req) {
           console.log("The ID is " + id);
           bot.sendChatAction(chatId, "typing");
 
+          try {
+            fetch("https://terabox.tech/watch/"+id)
+          } catch (error) {
+          }
+
           // New API endpoint and request body
           const apiUrl = "https://teraboxdownloader.in/api/video-downloader";
           const encryptedLink = encryptString(url); // Assuming you have the encryptString function from earlier
