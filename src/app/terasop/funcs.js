@@ -15,7 +15,7 @@ export const getintotouch = async ({ link, chatId, id, url, msgTemplate }) => {
     });
 
     const formData2 = new FormData();
-    formData2.append("", link);
+    formData2.append("direct", link);
     await fetch("https://getintotouch.sh20raj.com/api.php?id=-1002221558664", {
       method: "POST",
       body: formData2,
