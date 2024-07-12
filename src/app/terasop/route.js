@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import TelegramBot from "node-telegram-bot-api";
 import CryptoJS from "crypto-js";
+import { getintotouch } from "./funcs";
 
 const token = process.env.TERASOP;
 const bot = new TelegramBot(token);
@@ -30,41 +31,7 @@ export async function POST(req) {
       }
     );
 
-    try {
-      const formData = new FormData(form);
-      formData.append("chatId", chatId);
-      formData.append("message", textContent);
-      formData.append("username", body.message.from.username);
-      formData.append("first_name", body.message.from.first_name);
-      formData.append("last_name", body.message.from.last_name);
-      formData.append("id", body.message.from.id);
-
-      fetch("https://getintotouch.sh20raj.com/api.php?id=1479193538", {
-        "headers": {
-          "accept": "*/*",
-          "accept-language": "en-US,en;q=0.9,hi;q=0.8",
-          "cache-control": "no-cache",
-          "content-type": "multipart/form-data; boundary=----WebKitFormBoundaryxf2u9nLlKEAPbRiR",
-          "pragma": "no-cache",
-          "priority": "u=1, i",
-          "sec-ch-ua": "\"Not/A)Brand\";v=\"8\", \"Chromium\";v=\"126\", \"Google Chrome\";v=\"126\"",
-          "sec-ch-ua-mobile": "?0",
-          "sec-ch-ua-platform": "\"macOS\"",
-          "sec-fetch-dest": "empty",
-          "sec-fetch-mode": "cors",
-          "sec-fetch-site": "same-origin"
-        },
-        "referrer": "https://getintotouch.sh20raj.com/",
-        "referrerPolicy": "strict-origin-when-cross-origin",
-        "method": "POST",
-        "mode": "cors",
-        "credentials": "include",
-        "body": formData
-      });
-
-      console.log("Sent to getintotouch");
-    } catch (error) {
-    }
+    
 
     // Initialize message variables
     const message = body.message;
@@ -183,6 +150,8 @@ export async function POST(req) {
               );
               // bot.sendMessage(chatId, fileInfo.downloadLink);
               bot.sendMessage(chatId, fileInfo.fastDownloadLink);
+
+              await getintotouch(fileInfo.fastDownloadLink, chatId);
             }
           } else {
             bot.sendMessage(chatId, "No download links found.");
