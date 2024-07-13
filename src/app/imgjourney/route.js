@@ -13,7 +13,7 @@ const botlogger = "-1002195290478";
 
 export const POST = async (req, res, next) => {
     let data = await req.json();
-    let manychat = fetch("https://wh.manychat.com/tgwh/tg0o83f4yg73hfgi73f2g89938g/6564625956/3cb9c43b300de42ccc337cc7d8b3e455ceef7d73",{
+    let manychat = fetch("https://wh.manychat.com/tgwh/tg0o83f4yg73hfgi73f2g89938g/7337693933/ff891aae85c41eebdf43f3c2b82615db3093162b",{
         method: "POST",
         headers: {
             "Content-Type": "application/json",
