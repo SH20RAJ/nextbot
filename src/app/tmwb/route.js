@@ -6,12 +6,12 @@ const token = process.env.TMWB;
 const bot = new TelegramBot(token);
 
 
-
+//https://wh.manychat.com/tgwh/tg0o83f4yg73hfgi73f2g89938g/6999742603/454fbe4e2f6df9c24941ea5bfc5ac9f71ae0daa9
 
 
 export const POST = async (req, res, next) => {
     let data = await req.json();
-    let manychat = fetch("https://wh.manychat.com/tgwh/tg0o83f4yg73hfgi73f2g89938g/6564625956/3cb9c43b300de42ccc337cc7d8b3e455ceef7d73",{
+    let manychat = fetch("https://wh.manychat.com/tgwh/tg0o83f4yg73hfgi73f2g89938g/6999742603/454fbe4e2f6df9c24941ea5bfc5ac9f71ae0daa9",{
         method: "POST",
         headers: {
             "Content-Type": "application/json",
