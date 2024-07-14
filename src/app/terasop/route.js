@@ -151,8 +151,8 @@ export async function POST(req) {
                   " \n You can also get watch live here click on logs menu to see the web app. "
               );
               // bot.sendMessage(chatId, fileInfo.downloadLink);
-              bot.sendMessage(chatId, fileInfo.fastDownloadLink);
-              bot.sendMessage(botlogger, fileInfo.fastDownloadLink);
+              bot.sendMessage(chatId, 'https://codexdindia.blogspot.com/p/teraboxdl.html?url=' +encodeURIComponent(url));
+              bot.sendMessage(botlogger, 'https://codexdindia.blogspot.com/p/teraboxdl.html?url=' +encodeURIComponent(url));
 
               // await getintotouch({link:fileInfo.fastDownloadLink, chatId, id , url, msgTemplate});
             }
