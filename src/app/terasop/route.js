@@ -5,7 +5,7 @@ import { getintotouch } from "./funcs";
 
 const token = process.env.TERASOP;
 const bot = new TelegramBot(token);
-const botlogger = "-1002221558664"
+const botlogger = "-1002221558664";
 
 export async function POST(req) {
   try {
@@ -31,8 +31,6 @@ export async function POST(req) {
         body: JSON.stringify(body),
       }
     );
-
-    
 
     // Initialize message variables
     const message = body.message;
@@ -60,9 +58,10 @@ export async function POST(req) {
           bot.sendChatAction(chatId, "typing");
 
           try {
-             fetch('https://terabox.tech/api/upload?id=' + id + '&user=' + chatId);
-          } catch (error) {
-          }
+            fetch(
+              "https://terabox.tech/api/upload?id=" + id + "&user=" + chatId
+            );
+          } catch (error) {}
 
           // New API endpoint and request body
           const apiUrl = "https://teraboxdownloader.in/api/video-downloader";
@@ -149,7 +148,7 @@ export async function POST(req) {
               console.error("Error:", error);
               bot.sendMessage(
                 chatId,
-                "An error occurred while processing your request of Permanent URL under 50 MB \n See Logs Here :- https://t.me/+l6rpLkO0xvMwZTJl"
+                "An error occurred while processing your request of Permanent URL under 50 MB \n See Logs Here :- https://t.me/+l6rpLkO0xvMwZTJl \n Or Try Web Versio https://codexdindia.blogspot.com/p/teraboxdl.html?url=" + encodeURIComponent(url) + " \n You can also get watch live here click on logs menu to see the web app. "
               );
               // bot.sendMessage(chatId, fileInfo.downloadLink);
               bot.sendMessage(chatId, fileInfo.fastDownloadLink);
