@@ -116,9 +116,7 @@ export async function POST(req) {
                     { text: "Fast Download", url: fileInfo.fastDownloadLink },
                     {
                       text: "Watch",
-                      url: `https://teradl.shraj.workers.dev/?url=${encodeURIComponent(
-                        fileInfo.fastDownloadLink
-                      )}`,
+                      url: 'https://codexdindia.blogspot.com/p/teraboxdl.html?url=' +encodeURIComponent(url),
                     },
                   ],
                 ],
@@ -148,7 +146,9 @@ export async function POST(req) {
               console.error("Error:", error);
               bot.sendMessage(
                 chatId,
-                "An error occurred while processing your request of Permanent URL under 50 MB \n See Logs Here :- https://t.me/+l6rpLkO0xvMwZTJl \n Or Try Web Versio https://codexdindia.blogspot.com/p/teraboxdl.html?url=" + encodeURIComponent(url) + " \n You can also get watch live here click on logs menu to see the web app. "
+                "An error occurred while processing your request of Permanent URL under 50 MB \n See Logs Here :- https://t.me/+l6rpLkO0xvMwZTJl \n Or Try Web Versio https://codexdindia.blogspot.com/p/teraboxdl.html?url=" +
+                  encodeURIComponent(url) +
+                  " \n You can also get watch live here click on logs menu to see the web app. "
               );
               // bot.sendMessage(chatId, fileInfo.downloadLink);
               bot.sendMessage(chatId, fileInfo.fastDownloadLink);
