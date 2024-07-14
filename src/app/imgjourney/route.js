@@ -2,7 +2,7 @@
 const TelegramBot = require('node-telegram-bot-api');
 
 
-const token = process.env.IMGJOURNEYBOT;
+const token = process.env.SOPBOTUI;
 const bot = new TelegramBot(token);
 const botlogger = "-1002195290478";
 

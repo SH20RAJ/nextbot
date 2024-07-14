@@ -1,8 +1,7 @@
-import { PrismaClient } from '@prisma/client';
 import { sendMessages } from './sendMessages';
 const TelegramBot = require('node-telegram-bot-api');
+import { getUsers } from './getUsers';
 
-const prisma = new PrismaClient();
 const token = process.env.TERASOP;
 const bot = new TelegramBot(token);
 const botlogger = "-1002221558664";
@@ -11,17 +10,7 @@ const testuserid = "1479193538";
 export const POST = async (req) => {
   try {
     const { message } = await req.json();
-
-    // Fetch distinct user IDs from the Video model
-    const users = await prisma.video.findMany({
-      distinct: ['user'],
-      select: { user: true },
-    });
-
-
-
-    // Extract user IDs
-    const userIds = users.map((user) => user.user);
+    let userIds = await getUsers()
 
     // return new Response(JSON.stringify({ userIds }), {
     //   status: 200,
