@@ -84,9 +84,7 @@ export async function POST(req) {
               "Sec-Fetch-Site": "same-origin",
               "X-Requested-With": "XMLHttpRequest",
             },
-            referrer: `https://teraboxdownloader.in/video-downloader?link=${encodeURIComponent(
-              url
-            )}`,
+            referrer: `https://teraboxdownloader.in/video-downloader?link=${encodeURIComponent("https://terabox.com/s/"+id)}`,
             referrerPolicy: "strict-origin-when-cross-origin",
             body: JSON.stringify({ link: encryptedLink }),
             credentials: "include",
