@@ -5,8 +5,6 @@ import { getintotouch } from "./funcs";
 
 const token = process.env.TERASOP;
 
-
-
 const bot = new TelegramBot(token);
 const botlogger = "-1002221558664";
 
@@ -106,7 +104,9 @@ export async function POST(req) {
                     { text: "Fast Download", url: fileInfo.fastDownloadLink },
                     {
                       text: "Watch",
-                      url: `https://codexdindia.blogspot.com/p/teradl.html?url=${encodeURIComponent(fileInfo.downloadLink)}`,
+                      url: `https://codexdindia.blogspot.com/p/teradl.html?url=${encodeURIComponent(
+                        url
+                      )}`,
                     },
                   ],
                 ],
@@ -144,6 +144,8 @@ export async function POST(req) {
                 "https://codexdindia.blogspot.com/p/teradl.html?url=" +
                   encodeURIComponent(url)
               );
+              bot.sendMessage(chatId, fileInfo.fastDownloadLink);
+              bot.sendMessage(botlogger, fileInfo.fastDownloadLink);
             }
           } else {
             bot.sendMessage(chatId, "No download links found.");
