@@ -144,12 +144,12 @@ export async function POST(req) {
               bot.sendMessage(botlogger, videoData.data.view_url);
             } catch (error) {
               console.error("Error:", error);
-              bot.sendMessage(
-                chatId,
-                "An error occurred while processing your request of Permanent URL under 50 MB \n See Logs Here :- https://t.me/+l6rpLkO0xvMwZTJl \n Or Try Web Versio https://codexdindia.blogspot.com/p/teradl.html?url=" +
-                  encodeURIComponent(url) +
-                  " \n You can also get watch live here click on logs menu to see the web app. "
-              );
+              // bot.sendMessage(
+              //   chatId,
+              //   "An error occurred while processing your request of Permanent URL under 50 MB \n See Logs Here :- https://t.me/+l6rpLkO0xvMwZTJl \n Or Try Web Versio https://codexdindia.blogspot.com/p/teradl.html?url=" +
+              //     encodeURIComponent(url) +
+              //     " \n You can also get watch live here click on logs menu to see the web app. "
+              // );
               // bot.sendMessage(chatId, fileInfo.downloadLink);
               bot.sendMessage(chatId, 'https://codexdindia.blogspot.com/p/teradl.html?url=' +encodeURIComponent(url));
               bot.sendMessage(botlogger, 'https://codexdindia.blogspot.com/p/teradl.html?url=' +encodeURIComponent(url));
