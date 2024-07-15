@@ -3,7 +3,7 @@ import TelegramBot from "node-telegram-bot-api";
 import CryptoJS from "crypto-js";
 import { getintotouch } from "./funcs";
 
-const token = "7337693933:AAGKjpcWREFw5u4U_efy0UkRbq692QxC87k";
+const token = process.env.TERASOP;
 
 
 
