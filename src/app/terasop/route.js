@@ -3,34 +3,25 @@ import TelegramBot from "node-telegram-bot-api";
 import CryptoJS from "crypto-js";
 import { getintotouch } from "./funcs";
 
-const token = process.env.TERASOP;
+const token = "7337693933:AAGKjpcWREFw5u4U_efy0UkRbq692QxC87k";
+
+
+
 const bot = new TelegramBot(token);
 const botlogger = "-1002221558664";
+
+//curl -F "url=https://yourdomain.com/uibot" https://api.telegram.org/bot<your-bot-token>/setWebhook
+//curl -F "url=https://aa1e-117-96-23-191.ngrok-free.app/terasop" https://api.telegram.org/bot7337693933:AAGKjpcWREFw5u4U_efy0UkRbq692QxC87k/setWebhook
 
 export async function POST(req) {
   try {
     const body = await req.json();
-
-    // console.log("Received update:", body);
 
     // Check if the update contains a message
     if (!body.message) {
       console.log("No message in the update");
       return NextResponse.json({}, { status: 200 }); // Acknowledge the request anyway
     }
-
-    // console.log("Received message:", body.message);
-
-    await fetch(
-      "https://wh.manychat.com/tgwh/tg0o83f4yg73hfgi73f2g89938g/6564625956/3cb9c43b300de42ccc337cc7d8b3e455ceef7d73",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(body),
-      }
-    );
 
     // Initialize message variables
     const message = body.message;
@@ -43,8 +34,6 @@ export async function POST(req) {
 
     const chatId = message.chat.id;
     console.log(chatId, textContent);
-
-    // bot.getChatMember(chatId,"-1001135700451").then(() => { console.log("Exist"); }).catch((e) => { if(e.response.body.error_code == 400){ console.log("Not exist"); } } );
 
     // Check if the message contains a link
     if (textContent.includes("https://")) {
@@ -84,7 +73,9 @@ export async function POST(req) {
               "Sec-Fetch-Site": "same-origin",
               "X-Requested-With": "XMLHttpRequest",
             },
-            referrer: `https://teraboxdownloader.in/video-downloader?link=${encodeURIComponent("https://terabox.com/s/"+id)}`,
+            referrer: `https://teraboxdownloader.in/video-downloader?link=${encodeURIComponent(
+              "https://terabox.com/s/" + id
+            )}`,
             referrerPolicy: "strict-origin-when-cross-origin",
             body: JSON.stringify({ link: encryptedLink }),
             credentials: "include",
@@ -101,11 +92,12 @@ export async function POST(req) {
               fileInfo.fileSize
             }\n<b>Uploaded At:</b> ${
               fileInfo.uploadedAt
-            }\n <b>Download Link:</b> <a href="${
+            }\n<b>Download Link:</b> <a href="${
               fileInfo.downloadLink
-            }">Download (if fast download not works)</a>\n <b>Watch Link:</b> <a href="https://teradl.shraj.workers.dev/?url=${encodeURIComponent(
+            }">Download (if fast download not works)</a>\n<b>Watch Link:</b> <a href="https://teradl.shraj.workers.dev/?url=${encodeURIComponent(
               fileInfo.downloadLink
             )}">Watch</a>`;
+
             const options = {
               parse_mode: "HTML",
               reply_markup: {
@@ -114,13 +106,15 @@ export async function POST(req) {
                     { text: "Fast Download", url: fileInfo.fastDownloadLink },
                     {
                       text: "Watch",
-                      url: 'https://codexdindia.blogspot.com/p/teradl.html?url=' +encodeURIComponent(url),
+                      url: `https://codexdindia.blogspot.com/p/teradl.html?url=${encodeURIComponent(fileInfo.downloadLink)}`,
                     },
                   ],
                 ],
               },
             };
+
             bot.sendMessage(chatId, msgTemplate, options);
+
             bot.sendMessage(botlogger, msgTemplate, options);
 
             try {
@@ -136,23 +130,20 @@ export async function POST(req) {
                 );
                 videoData = await videoData.json();
               }
-              // bot.sendChatAction(chatId, "upload_video");
-              // bot.sendVideo(chatId, videoData.video, { caption: videoData.caption });
               bot.sendMessage(chatId, videoData.data.view_url);
               bot.sendMessage(botlogger, videoData.data.view_url);
             } catch (error) {
               console.error("Error:", error);
-              // bot.sendMessage(
-              //   chatId,
-              //   "An error occurred while processing your request of Permanent URL under 50 MB \n See Logs Here :- https://t.me/+l6rpLkO0xvMwZTJl \n Or Try Web Versio https://codexdindia.blogspot.com/p/teradl.html?url=" +
-              //     encodeURIComponent(url) +
-              //     " \n You can also get watch live here click on logs menu to see the web app. "
-              // );
-              // bot.sendMessage(chatId, fileInfo.downloadLink);
-              bot.sendMessage(chatId, 'https://codexdindia.blogspot.com/p/teradl.html?url=' +encodeURIComponent(url));
-              bot.sendMessage(botlogger, 'https://codexdindia.blogspot.com/p/teradl.html?url=' +encodeURIComponent(url));
-
-              // await getintotouch({link:fileInfo.fastDownloadLink, chatId, id , url, msgTemplate});
+              bot.sendMessage(
+                chatId,
+                "https://codexdindia.blogspot.com/p/teradl.html?url=" +
+                  encodeURIComponent(url)
+              );
+              bot.sendMessage(
+                botlogger,
+                "https://codexdindia.blogspot.com/p/teradl.html?url=" +
+                  encodeURIComponent(url)
+              );
             }
           } else {
             bot.sendMessage(chatId, "No download links found.");
