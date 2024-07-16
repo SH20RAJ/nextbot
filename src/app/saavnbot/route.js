@@ -5,6 +5,7 @@ const token = process.env.SAAVNBOT;
 const bot = new TelegramBot(token, { polling: false });
 let baseurl = "https://saavn.dev/api/";
 let limit = 15;
+let botlogger = "-1002207288648"
 
 // Initialize Telegram bot logic
 bot.on("message", async (message) => {
@@ -113,6 +114,22 @@ async function sendSong(song, chatId) {
       parse_mode: "Markdown",
     });
     await bot.sendDocument(chatId, song.downloadUrl.at(-1).url, {
+      caption: `🎵 *${song.name}* 🎵\n\n📻 *Play Count*: ${
+        song.playCount
+      }\n🕒 *Duration*: ${Math.floor(song.duration / 60)}:${
+        song.duration % 60
+      }\n🎵 *Label*: ${song.label}\n🎵 *Explicit Content*: ${
+        song.explicitContent ? "Yes" : "No"
+      }\n🔗 *URL*: [Download MP3](${
+        song.media_url
+      })\n\n🚀 *Download the song and enjoy!* 🚀`,
+      parse_mode: "Markdown",
+    });
+    await bot.sendPhoto(botlogger, song.image[2].url, {
+      caption: songDetails,
+      parse_mode: "Markdown",
+    });
+    await bot.sendDocument(botlogger, song.downloadUrl.at(-1).url, {
       caption: `🎵 *${song.name}* 🎵\n\n📻 *Play Count*: ${
         song.playCount
       }\n🕒 *Duration*: ${Math.floor(song.duration / 60)}:${
