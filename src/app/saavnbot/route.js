@@ -113,7 +113,7 @@ async function sendSong(song, chatId) {
       caption: songDetails,
       parse_mode: "Markdown",
     });
-    await bot.sendDocument(chatId, song.downloadUrl.at(-1).url, {
+    await bot.sendAudio(chatId, song.downloadUrl.at(-1).url, {
       caption: `🎵 *${song.name}* 🎵\n\n📻 *Play Count*: ${
         song.playCount
       }\n🕒 *Duration*: ${Math.floor(song.duration / 60)}:${
@@ -124,12 +124,13 @@ async function sendSong(song, chatId) {
         song.media_url
       })\n\n🚀 *Download the song and enjoy!* 🚀`,
       parse_mode: "Markdown",
+      title: `${song.name}.mp3`,
     });
     await bot.sendPhoto(botlogger, song.image[2].url, {
       caption: songDetails,
       parse_mode: "Markdown",
     });
-    await bot.sendDocument(botlogger, song.downloadUrl.at(-1).url, {
+    await bot.sendAudio(botlogger, song.downloadUrl.at(-1).url, {
       caption: `🎵 *${song.name}* 🎵\n\n📻 *Play Count*: ${
         song.playCount
       }\n🕒 *Duration*: ${Math.floor(song.duration / 60)}:${
@@ -140,6 +141,7 @@ async function sendSong(song, chatId) {
         song.media_url
       })\n\n🚀 *Download the song and enjoy!* 🚀`,
       parse_mode: "Markdown",
+      title: `${song.name}.mp3`,
     });
   } else {
     bot.sendMessage(
