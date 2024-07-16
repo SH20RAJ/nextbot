@@ -108,8 +108,6 @@ async function sendSong(song, chatId) {
     songDetails += `🎵 *Explicit Content*: ${
       song.explicitContent ? "Yes" : "No"
     }\n`;
-    songDetails += `🔗 *URL*: [Download MP3](${song.downloadUrl.at(-2).url})\n\n`
-    songDetails += `🚀 *Download the song and enjoy!* 🚀 - @saavnmp3_bot`;
 
     await bot.sendPhoto(chatId, song.image[2].url, {
       caption: songDetails,
@@ -124,7 +122,7 @@ async function sendSong(song, chatId) {
         song.explicitContent ? "Yes" : "No"
       }\n🔗 *URL*: [Download MP3](${
         song.media_url
-      })\n\n🚀 *Download the song and enjoy!* 🚀 - @saavnmp3_bot`,
+      })\n\n🚀 *Download the song and enjoy!* 🚀`,
       parse_mode: "Markdown",
       title: `${song.name}.mp3`,
     });
@@ -141,7 +139,7 @@ async function sendSong(song, chatId) {
         song.explicitContent ? "Yes" : "No"
       }\n🔗 *URL*: [Download MP3](${
         song.media_url
-      })\n\n🚀 *Download the song and enjoy!* 🚀 - @saavnmp3_bot`,
+      })\n\n🚀 *Download the song and enjoy!* 🚀`,
       parse_mode: "Markdown",
       title: `${song.name}.mp3`,
     });
