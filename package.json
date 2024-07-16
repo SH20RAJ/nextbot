@@ -13,6 +13,7 @@
     "axios": "^1.7.2",
     "crypto": "^1.0.1",
     "crypto-js": "^4.2.0",
+    "jsonwebtoken": "^9.0.2",
     "next": "14.2.3",
     "node-telegram-bot-api": "^0.65.1",
     "prisma": "^5.16.2",
