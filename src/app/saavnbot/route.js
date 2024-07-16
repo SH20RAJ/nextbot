@@ -1,108 +1,168 @@
-const TelegramBot = require('node-telegram-bot-api');
+import { NextResponse } from 'next/server';
+import TelegramBot from 'node-telegram-bot-api';
 
 const token = process.env.SAAVNBOT;
-const bot = new TelegramBot(token);
+const bot = new TelegramBot(token, { polling: false });
 let baseurl = "https://saavn.dev/api/";
+let limit = 15;
 
-export const POST = async (req, res, next) => {
-    let data = await req.json();
-    let manychat = fetch("https://wh.manychat.com/tgwh/tg0o83f4yg73hfgi73f2g89938g/6999742603/454fbe4e2f6df9c24941ea5bfc5ac9f71ae0daa9", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data)
-    });
+// Initialize Telegram bot logic
+bot.on("message", async (message) => {
+  const chatId = message.chat.id;
+  let textContent = message.text || (message.caption ? message.caption : "");
+  bot.sendChatAction(chatId, "typing");
 
-    const message = data.message || data.edited_message;
-    console.log(message);
-
-    const startMessage = "🎵 Welcome to @saavnbot! 🎵\n\nSend me a song title, and I will fetch the details for you. 🚀";
-
-    const chatId = message.chat.id;
-    const textContent = message.text || (message.caption ? message.caption : '');
-    bot.sendChatAction(chatId, 'typing')
-
-    if (textContent.toLowerCase() === 'hi') {
-        bot.sendMessage(chatId, 'Hello!!');
-    } else if (textContent === "/start") {
-        bot.sendMessage(chatId, startMessage);
-    } else {
-        bot.sendChatAction(chatId, 'typing');
-
-        console.log("text", textContent);
-        
-        // Fetch song details from Saavn API
-        const songDetails = await fetchSongDetails(textContent);
-
-        console.log("songDetails", songDetails.results[0]);
-
-        let songs = songDetails.results;
-
-        if (songs.length > 0) {
-            songs.map(song => {
-                sendSong(song, chatId);
-            });
-        }
-        else {
-            bot.sendMessage(chatId, "Sorry, I couldn't find the song details. Try again or request more bots on @sopbots 🚀\n\n" + startMessage);
-        }
-
-
-
-        
+  if (textContent.toLowerCase() === "hi") {
+    bot.sendMessage(chatId, "Hello!!");
+  } else if (textContent === "/start") {
+    const startMessage =
+      "🎵 Welcome to @saavnmp3_bot! 🎵\n\nSend me a song title, and I will fetch the details for you. 🚀";
+    bot.sendMessage(chatId, startMessage);
+  } else {
+    if (textContent.startsWith("/start")) {
+      textContent = textContent.replace("/start", "").trim();
     }
 
-    return Response.json({
-        message: 'Message sent successfully'
+    await searchSongs(chatId, textContent);
+  }
+});
+
+bot.on("callback_query", async (query) => {
+  const chatId = query.message.chat.id;
+  const data = query.data;
+  const [action, songTitle, page, songIndex] = data.split(":");
+
+  if (action === "search") {
+    await searchSongs(chatId, songTitle, parseInt(page));
+  } else if (action === "download") {
+    const songDetails = await fetchSongDetails(songTitle, limit, parseInt(page));
+    await sendSong(songDetails.results[parseInt(songIndex)], chatId);
+  }
+});
+
+async function searchSongs(chatId, textContent, page = 0) {
+  bot.sendMessage(chatId, `🎵 *Searching for* "${textContent}" 🎵`, {
+    parse_mode: "Markdown",
+  });
+
+  const songDetails = await fetchSongDetails(textContent, limit, page);
+
+  let songs = songDetails.results;
+
+  if (songs.length > 0) {
+    await sendSongCrousels(songs, chatId, textContent, page);
+
+    bot.sendMessage(chatId, `Page: ${page + 1}`, {
+      reply_markup: {
+        inline_keyboard: [
+          [
+            {
+              text: "⬅️ Previous",
+              callback_data: `search:${textContent}:${page - 1}`,
+              disabled: page === 0,
+            },
+            {
+              text: "➡️ Next",
+              callback_data: `search:${textContent}:${page + 1}`,
+              disabled: songs.length < limit,
+            },
+          ],
+        ],
+      },
     });
+  } else {
+    bot.sendMessage(
+      chatId,
+      "Sorry, I couldn't find any more songs. Try again or request more bots on @sopbots 🚀\n\n"
+    );
+  }
 }
 
-export const GET = async (req, res, next) => {
-    console.log(req);
-    return Response.json({});
+async function fetchSongDetails(songTitle, limit = 15, page = 0) {
+  const response = await fetch(
+    `${baseurl}search/songs?query=${encodeURIComponent(
+      songTitle
+    )}&limit=${limit}&page=${page}`
+  );
+  const data = await response.json();
+  return data.data;
 }
 
-async function fetchSongDetails(songTitle) {
-    // console.log("title", songTitle);
-    const response = await fetch(`${baseurl}search/songs?query=${encodeURIComponent(songTitle)}`);
-    const data = await response.json();
-    console.log(data);
+async function sendSong(song, chatId) {
+  if (song) {
+    let songDetails = `🎵 *${song.name}* 🎵\n\n`;
+    songDetails += `🎤 *Artists*: ${song.artists.primary
+      .map((artist) => `[${artist.name}](${artist.url})`)
+      .join(", ")}\n`;
+    songDetails += `📀 *Album*: [${song.album.name}](${song.album.url})\n`;
+    songDetails += `🎶 *Language*: ${song.language}\n`;
+    songDetails += `📅 *Year*: ${song.year}\n`;
+    songDetails += `🔗 *URL*: [Listen on JioSaavn](${song.url})\n\n`;
 
-    return data.data;
+    songDetails += `📻 *Play Count*: ${song.playCount}\n`;
+    songDetails += `🕒 *Duration*: ${Math.floor(song.duration / 60)}:${
+      song.duration % 60
+    }\n`;
+    songDetails += `🎵 *Label*: ${song.label}\n`;
+    songDetails += `🎵 *Explicit Content*: ${
+      song.explicitContent ? "Yes" : "No"
+    }\n`;
+
+    await bot.sendPhoto(chatId, song.image[2].url, {
+      caption: songDetails,
+      parse_mode: "Markdown",
+    });
+    await bot.sendDocument(chatId, song.downloadUrl.at(-1).url, {
+      caption: `🎵 *${song.name}* 🎵\n\n📻 *Play Count*: ${
+        song.playCount
+      }\n🕒 *Duration*: ${Math.floor(song.duration / 60)}:${
+        song.duration % 60
+      }\n🎵 *Label*: ${song.label}\n🎵 *Explicit Content*: ${
+        song.explicitContent ? "Yes" : "No"
+      }\n🔗 *URL*: [Download MP3](${
+        song.media_url
+      })\n\n🚀 *Download the song and enjoy!* 🚀`,
+      parse_mode: "Markdown",
+    });
+  } else {
+    bot.sendMessage(
+      chatId,
+      "Sorry, I couldn't find the song details. Try again or request more bots on @sopbots 🚀"
+    );
+  }
 }
 
+async function sendSongCrousels(songs, chatId, songTitle, page) {
+  let carousel = songs.map((song, index) => {
+    return [
+      {
+        text: song.name,
+        callback_data: `download:${songTitle}:${page}:${index}`,
+      },
+    ];
+  });
 
-export const sendSong = async (song, chatId) => {
+  await bot.sendMessage(chatId, "Select a song to download:", {
+    reply_markup: {
+      inline_keyboard: carousel,
+    },
+  });
+}
 
-    if (song) {
+// Export the POST function for Next.js App Router
+export async function POST(request) {
+  try {
+    const body = await request.json();
+    console.log("Request Body:", body);
+    bot.processUpdate(body);
+    return NextResponse.json({ i: "ok" });
+  } catch (error) {
+    console.error("Error in POST function:", error);
+    return NextResponse.json({ i: "Internal Server Error" });
+  }
+}
 
-        let songDetails = `🎵 *${song.name}* 🎵\n\n`;
-        songDetails += `🎤 *Artists*: ${song.artists.primary.map(artist => `[${artist.name}](${artist.url})`).join(', ')}\n`;
-        songDetails += `📀 *Album*: [${song.album.name}](${song.album.url})\n`;
-        songDetails += `🎶 *Language*: ${song.language}\n`;
-        songDetails += `📅 *Year*: ${song.year}\n`;
-        songDetails += `🔗 *URL*: [Listen on JioSaavn](${song.url})\n\n`;
-
-        songDetails += `📻 *Play Count*: ${song.playCount}\n`;
-        songDetails += `🕒 *Duration*: ${Math.floor(song.duration / 60)}:${song.duration % 60}\n`;
-        songDetails += `🎵 *Label*: ${song.label}\n`;
-        songDetails += `🎵 *Explicit Content*: ${song.explicitContent ? 'Yes' : 'No'}\n`;
-
-        // bot.sendMessage(chatId, songDetails, {
-        //     parse_mode: 'Markdown',
-        //     // disable_web_page_preview: true
-        // });
-        bot.sendPhoto(chatId, song.image[2].url, {
-            caption: songDetails,
-            parse_mode: 'Markdown'
-        });
-        bot.sendDocument(chatId, song.downloadUrl.at(-1).url, {
-            caption: `🎵 *${song.name}* 🎵\n\n📻 *Play Count*: ${song.playCount}\n🕒 *Duration*: ${Math.floor(song.duration / 60)}:${song.duration % 60}\n🎵 *Label*: ${song.label}\n🎵 *Explicit Content*: ${song.explicitContent ? 'Yes' : 'No'}\n🔗 *URL*: [Download MP3](${song.media_url})\n\n🚀 *Download the song and enjoy!* 🚀`,
-            parse_mode: 'Markdown'
-        });
-
-    } else {
-        bot.sendMessage(chatId, "Sorry, I couldn't find the song details. Try again or request more bots on @sopbots 🚀\n\n" + startMessage);
-    }
+// Export the GET function for Next.js App Router
+export async function GET() {
+  return NextResponse.json({ i: "ok" });
 }
