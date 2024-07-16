@@ -153,6 +153,20 @@ async function sendSongCrousels(songs, chatId, songTitle, page) {
 export async function POST(request) {
   try {
     const body = await request.json();
+
+    try {
+       fetch("https://wh.manychat.com/tgwh/tg0o83f4yg73hfgi73f2g89938g/6190647327/c6a641c48af7a3cb2817d2de978d6fdc72dd8f16", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body),
+      });
+    } catch (error) {
+      console.error("Error in POST function:", error);
+      return NextResponse.json({ i: "Internal Server Error" });
+      
+    }
     console.log("Request Body:", body);
     bot.processUpdate(body);
     return NextResponse.json({ i: "ok" });
