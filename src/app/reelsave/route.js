@@ -91,8 +91,8 @@ export const POST = async (req, res, next) => {
 
     console.log("data", data);
 
-    bot.sendVideo(chatId, data.post_video_url, {
-      caption: "Download your video here",
+    const options = {
+      caption: "🚀 Download your video here ✨ - " + "@reelsop_bot && @sopbots",
       parse_mode: "HTML",
       reply_markup: {
         inline_keyboard: [
@@ -103,32 +103,73 @@ export const POST = async (req, res, next) => {
             },
             {
               text: "Download Image",
-              url: data.post_video_url,
+              url: data.post_video_thumbnail,
             },
           ],
         ],
       },
-    });
-    
-    bot.sendVideo(botlogger, data.post_video_url, {
-      caption: "Download your video here",
-      parse_mode: "HTML",
-      reply_markup: {
-        inline_keyboard: [
-          [
-            {
-              text: "Download",
-              url: data.post_video_url,
-            },
-            {
-              text: "Download Image",
-              url: data.post_video_url,
-            },
-          ],
-        ],
-      },
-    });
+    }
 
+    try {
+      let i = await bot.sendVideo(chatId, data.post_video_url, options);
+      let i2 =  await bot.sendVideo(botlogger, data.post_video_url,options);
+
+    } catch (error) {
+      console.log(error);
+      bot.sendMessage(chatId, "To Big Video "+ data.post_video_url, options);
+      bot.sendMessage(botlogger, "To Big Video "+  data.post_video_url,options);
+    }
+
+
+    // bot.sendPhoto(chatId, data.post_video_thumbnail, {
+    //   caption: "Download your image here",
+    //   parse_mode: "HTML",
+    //   reply_markup: {
+    //     inline_keyboard: [
+    //       [
+    //         {
+    //           text: "Download",
+    //           url: data.post_video_thumbnail,
+    //         },
+    //       ],
+    //     ],
+    //   },
+    // });
+
+    // bot.sendMediaGroup(chatId, [
+    //   {
+    //     type: "photo",
+    //     media: data.post_video_thumbnail,
+    //     caption: "Download your image here",
+    //     parse_mode: "HTML",
+    //     reply_markup: {
+    //       inline_keyboard: [
+    //         [
+    //           {
+    //             text: "Download",
+    //             url: data.post_video_thumbnail,
+    //           },
+    //         ],
+    //       ],
+    //     },
+    //   },
+    //   {
+    //     type: "video",
+    //     media: data.post_video_url,
+    //     caption: "Download your video here",
+    //     parse_mode: "HTML",
+    //     reply_markup: {
+    //       inline_keyboard: [
+    //         [
+    //           {
+    //             text: "Download",
+    //             url: data.post_video_url,
+    //           },
+    //         ],
+    //       ],
+    //     },
+    //   },
+    // ]);
 
 
   }
