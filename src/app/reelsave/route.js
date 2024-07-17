@@ -40,8 +40,7 @@ export const POST = async (req, res, next) => {
     // bot.sendMessage(chatId, 'I am a bot, I do not understand human language');
 
     //match only instagram urls
-    const url = textContent.match(/https?:\/\/(?:www\.)?instagram\.com\/reel\/[a-zA-Z0-9_-]+\/?/g
-    );
+    const url = textContent.match(/https?:\/\/(?:www\.)?instagram\.com\/(?:reel(s)?|p)\/[a-zA-Z0-9_-]+\/?/g);
 
     if (!url) {
       bot.sendMessage(chatId, "No URL found");
