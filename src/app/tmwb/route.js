@@ -34,7 +34,7 @@ export const POST = async (req, res, next) => {
     const message = data.message || data.edited_message;
     console.log(message);
 
-    const startMessage = "🌟 Welcome to @tmwbbot! 🌟\n\nSend me an IMDB link I will send you the stream URL or Type @imdbot then `space` then type the name of the movie then click on it to send 🚀";
+    const startMessage = "🌟 Welcome to @tmwbbot! 🌟\n\nSend me an IMDB link I will send you the stream URL or Type @imdbot then `space` then type the name of the movie then click on it to send 🚀✨";
 
 
     const chatId = message.chat.id;
