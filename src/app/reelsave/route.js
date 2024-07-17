@@ -3,10 +3,10 @@ const TelegramBot = require("node-telegram-bot-api");
 
 const token = process.env.REELSAVE;
 const bot = new TelegramBot(token);
-let botlogger = "-1002207414763"
+let botlogger = "-1002207414763";
 
 //https://wh.manychat.com/tgwh/tg0o83f4yg73hfgi73f2g89938g/7371884410/fdcdfdd385640e06dfb8e101601c4696fb7c99eb
-
+//@reelsop_bot && @sopbots
 // instagram download bot
 
 export const POST = async (req, res, next) => {
@@ -39,7 +39,10 @@ export const POST = async (req, res, next) => {
   } else {
     // bot.sendMessage(chatId, 'I am a bot, I do not understand human language');
 
-    const url = textContent.match(/(https?:\/\/[^\s]+)/g);
+    //match only instagram urls
+    const url = textContent.match(/https?:\/\/(?:www\.)?instagram\.com\/reels\/[a-zA-Z0-9_-]+\/?/g
+    );
+
     if (!url) {
       bot.sendMessage(chatId, "No URL found");
 
@@ -47,14 +50,14 @@ export const POST = async (req, res, next) => {
         message: "No URL found",
       });
     }
+
     console.log("url", url);
 
     const fetchurl = generateDownloadUrl(url[0]);
     console.log("fetchurl", fetchurl);
 
     let data = await fetch(
-      "https://insta.savetube.me/downloadPostVideo?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjoiVXNlciIsImlhdCI6MTcyMTE1ODY1NSwiZXhwIjoxNzIxMTU4Njg1fQ.nwJCB1b08BoJf5wcdZJ6RA5U8HgDCtqrZpdp3N4vKJ0",
-      {
+      fetchurl,{
         headers: {
           accept: "*",
           "accept-language": "en-US,en;q=0.9,hi;q=0.8",
@@ -92,7 +95,7 @@ export const POST = async (req, res, next) => {
     console.log("data", data);
 
     const options = {
-      caption: "🚀 Download your video here ✨ - " + "@reelsop_bot && @sopbots",
+      caption: "🚀 Download your video here ✨ - @sopbots && @reelsop_bot ",
       parse_mode: "HTML",
       reply_markup: {
         inline_keyboard: [
@@ -108,18 +111,20 @@ export const POST = async (req, res, next) => {
           ],
         ],
       },
-    }
+    };
 
     try {
       let i = await bot.sendVideo(chatId, data.post_video_url, options);
-      let i2 =  await bot.sendVideo(botlogger, data.post_video_url,options);
-
+      let i2 = await bot.sendVideo(botlogger, data.post_video_url, options);
     } catch (error) {
       console.log(error);
-      bot.sendMessage(chatId, "To Big Video "+ data.post_video_url, options);
-      bot.sendMessage(botlogger, "To Big Video "+  data.post_video_url,options);
+      bot.sendMessage(chatId, "To Big Video " + data.post_video_url, options);
+      bot.sendMessage(
+        botlogger,
+        "To Big Video " + data.post_video_url,
+        options
+      );
     }
-
 
     // bot.sendPhoto(chatId, data.post_video_thumbnail, {
     //   caption: "Download your image here",
@@ -170,8 +175,6 @@ export const POST = async (req, res, next) => {
     //     },
     //   },
     // ]);
-
-
   }
 
   return Response.json({
