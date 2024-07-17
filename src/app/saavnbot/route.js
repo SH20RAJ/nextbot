@@ -122,7 +122,7 @@ async function sendSong(song, chatId) {
         song.explicitContent ? "Yes" : "No"
       }\n🔗 *URL*: [Download MP3](${
         song.media_url
-      })\n\n🚀 *Download the song and enjoy!* 🚀  @sopbbots`,
+      })\n\n🚀 *Download the song and enjoy!* 🚀`,
       parse_mode: "Markdown",
       title: `${song.name}.mp3`,
     });
@@ -139,7 +139,7 @@ async function sendSong(song, chatId) {
         song.explicitContent ? "Yes" : "No"
       }\n🔗 *URL*: [Download MP3](${
         song.media_url
-      })\n\n🚀 *Download the song and enjoy!* 🚀 @sopbots`,
+      })\n\n🚀 *Download the song and enjoy!* 🚀`,
       parse_mode: "Markdown",
       title: `${song.name}.mp3`,
     });

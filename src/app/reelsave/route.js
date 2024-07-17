@@ -90,25 +90,44 @@ export const POST = async (req, res, next) => {
     */
 
     console.log("data", data);
-    let options = {
-      caption: "Download your <a href="+data.post_video_url+">video</a> here and <a href="+data.post_video_thumbnail+">thumbnail</a> here - @SopBots",
+
+    bot.sendVideo(chatId, data.post_video_url, {
+      caption: "Download your video here",
       parse_mode: "HTML",
       reply_markup: {
         inline_keyboard: [
           [
             {
               text: "Download",
-              url: data.post_video_thumbnail,
-            }
+              url: data.post_video_url,
+            },
+            {
+              text: "Download Image",
+              url: data.post_video_url,
+            },
           ],
         ],
       },
-    }
-
-    bot.sendVideo(chatId, data.post_video_url,options);
-    bot.sendVideo(botlogger, data.post_video_url,options);
+    });
     
-    
+    bot.sendVideo(botlogger, data.post_video_url, {
+      caption: "Download your video here",
+      parse_mode: "HTML",
+      reply_markup: {
+        inline_keyboard: [
+          [
+            {
+              text: "Download",
+              url: data.post_video_url,
+            },
+            {
+              text: "Download Image",
+              url: data.post_video_url,
+            },
+          ],
+        ],
+      },
+    });
 
 
 

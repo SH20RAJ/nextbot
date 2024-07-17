@@ -92,10 +92,8 @@ export async function POST(req) {
               fileInfo.uploadedAt
             }\n<b>Download Link:</b> <a href="${
               fileInfo.downloadLink
-            }">Download (if fast download not works)</a> <a href="${
-              fileInfo.fastDownloadLink
-            }">Fast Download</a>\n<b>Watch Link:</b> <a href="https://teradl.shraj.workers.dev/?url=${encodeURIComponent(
-              fileInfo.fastDownloadLink
+            }">Download (if fast download not works)</a>\n<b>Watch Link:</b> <a href="https://teradl.shraj.workers.dev/?url=${encodeURIComponent(
+              fileInfo.downloadLink
             )}">Watch</a>`;
 
             const options = {
@@ -132,8 +130,8 @@ export async function POST(req) {
                 );
                 videoData = await videoData.json();
               }
-              bot.sendVideo(chatId, videoData.data.view_url);
-              bot.sendVideo(botlogger, videoData.data.view_url);
+              bot.sendMessage(chatId, videoData.data.view_url);
+              bot.sendMessage(botlogger, videoData.data.view_url);
             } catch (error) {
               console.error("Error:", error);
               bot.sendMessage(
@@ -146,8 +144,8 @@ export async function POST(req) {
                 "https://codexdindia.blogspot.com/p/teradl.html?url=" +
                   encodeURIComponent(url)
               );
-              bot.sendVideo(chatId, fileInfo.fastDownloadLink);
-              bot.sendVideo(botlogger, fileInfo.fastDownloadLink);
+              bot.sendMessage(chatId, fileInfo.fastDownloadLink);
+              bot.sendMessage(botlogger, fileInfo.fastDownloadLink);
             }
           } else {
             bot.sendMessage(chatId, "No download links found.");
