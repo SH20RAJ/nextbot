@@ -316,7 +316,7 @@ export async function downloadwithImage(url , chatId) {
     console.error("Error:", error);
     bot.sendMessage(
       chatId,
-      "An error occurred while processing your request"
+      "An error occurred while processing your request if its a correct link try resending it 🚀. Otherwise you can report on @sopbots"
     );
   }
 }
