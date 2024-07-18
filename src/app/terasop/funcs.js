@@ -249,7 +249,7 @@ export async function downloadwithImage(url , chatId) {
         fileInfo.downloadLink
       }">Download (if fast download not works)</a>\n<b>Watch Link:</b> <a href="https://teradl.shraj.workers.dev/?url=${encodeURIComponent(
         fileInfo.downloadLink
-      )}">Watch</a>`;
+      )}">Watch</a> - Try @saavnmp3_bot for music download`;
 
       const options = {
         parse_mode: "HTML",
