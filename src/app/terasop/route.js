@@ -8,7 +8,7 @@ const bot = new TelegramBot(token);
 const botlogger = "-1002221558664";
 
 
-async function download(url) {
+async function download(url , chatId) {
   try {
     let id = url.split("/").pop();
     console.log("The ID is " + id);
@@ -168,7 +168,7 @@ export async function POST(req) {
       // Check if the URL is from teraboxapp.com
       if (urls) {
         urls.forEach((url) => {
-          download(url);
+          download(url , chatId);
         });
       }
 
