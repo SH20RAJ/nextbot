@@ -167,7 +167,7 @@ export async function POST(req) {
       const urls = extractUrls(textContent);
       // Check if the URL is from teraboxapp.com
       if (urls) {
-        urls.forEach((url) => {
+        urls.map((url) => {
           download(url , chatId);
         });
       }
