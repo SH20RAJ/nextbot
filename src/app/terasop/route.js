@@ -164,7 +164,7 @@ export async function POST(req) {
 
     // Check if the message contains a link
     if (textContent.includes("https://")) {
-      const urls = extractUrl(textContent);
+      const urls = extractUrls(textContent);
       // Check if the URL is from teraboxapp.com
       if (urls) {
         urls.forEach((url) => {
