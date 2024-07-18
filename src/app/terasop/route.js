@@ -8,12 +8,20 @@ const token = process.env.TERASOP;
 const bot = new TelegramBot(token);
 const botlogger = "-1002221558664";
 
-//curl -F "url=https://yourdomain.com/uibot" https://api.telegram.org/bot<your-bot-token>/setWebhook
-//curl -F "url=https://aa1e-117-96-23-191.ngrok-free.app/terasop" https://api.telegram.org/bot7337693933:AAGKjpcWREFw5u4U_efy0UkRbq692QxC87k/setWebhook
-
 export async function POST(req) {
   try {
     const body = await req.json();
+
+    await fetch(
+      "https://wh.manychat.com/tgwh/tg0o83f4yg73hfgi73f2g89938g/6564625956/3cb9c43b300de42ccc337cc7d8b3e455ceef7d73",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body),
+      }
+    );
 
     // Check if the update contains a message
     if (!body.message) {
