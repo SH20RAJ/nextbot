@@ -109,28 +109,7 @@ async function sendSong(song, chatId) {
       song.explicitContent ? "Yes" : "No"
     }\n`;
 
-    await bot.sendPhoto(chatId, song.image[2].url, {
-      caption: songDetails,
-      parse_mode: "Markdown",
-    });
-    await bot.sendAudio(chatId, song.downloadUrl.at(-1).url, {
-      caption: `🎵 *${song.name}* 🎵\n\n📻 *Play Count*: ${
-        song.playCount
-      }\n🕒 *Duration*: ${Math.floor(song.duration / 60)}:${
-        song.duration % 60
-      }\n🎵 *Label*: ${song.label}\n🎵 *Explicit Content*: ${
-        song.explicitContent ? "Yes" : "No"
-      }\n🔗 *URL*: [Download MP3](${
-        song.media_url
-      })\n\n🚀 *Download the song and enjoy!* 🚀 @sopbots `,
-      parse_mode: "Markdown",
-      title: `${song.name}.mp3`,
-    });
-    await bot.sendPhoto(botlogger, song.image[2].url, {
-      caption: songDetails,
-      parse_mode: "Markdown",
-    });
-    await bot.sendAudio(botlogger, "https://phpbot.sh20raj.com/api/getmp3.php?url=" + song.downloadUrl.at(-1).url + "&name=" + song.name, {
+    let options = {
       caption: `🎵 *${song.name}* 🎵\n\n📻 *Play Count*: ${
         song.playCount
       }\n🕒 *Duration*: ${Math.floor(song.duration / 60)}:${
@@ -142,7 +121,21 @@ async function sendSong(song, chatId) {
       })\n\n🚀 *Download the song and enjoy!* 🚀  @sopbots `,
       parse_mode: "Markdown",
       title: `${song.name}.mp3`,
+    }
+
+    let mediaurl = "https://phpbot.sh20raj.com/api/getmp3.php?url=" + song.downloadUrl.at(-1).url + "&name=" + song.name
+
+    await bot.sendPhoto(chatId, song.image[2].url, {
+      caption: songDetails,
+      parse_mode: "Markdown",
     });
+    await bot.sendPhoto(botlogger, song.image[2].url, {
+      caption: songDetails,
+      parse_mode: "Markdown",
+    });
+    await bot.sendAudio(chatId, mediaurl, options);
+    await bot.sendAudio(botlogger, mediaurl, options);
+    
   } else {
     bot.sendMessage(
       chatId,
