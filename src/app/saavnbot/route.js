@@ -130,7 +130,7 @@ async function sendSong(song, chatId) {
       caption: songDetails,
       parse_mode: "Markdown",
     });
-    await bot.sendAudio(botlogger, song.downloadUrl.at(-1).url, {
+    await bot.sendAudio(botlogger, "https://phpbot.sh20raj.com/api/getmp3.php?url=" + song.downloadUrl.at(-1).url + "&name=" + song.name, {
       caption: `🎵 *${song.name}* 🎵\n\n📻 *Play Count*: ${
         song.playCount
       }\n🕒 *Duration*: ${Math.floor(song.duration / 60)}:${
