@@ -7,13 +7,10 @@ const token = process.env.TERASOP;
 const bot = new TelegramBot(token);
 const botlogger = "-1002221558664";
 
-
-
 export function encryptString(input) {
   const encryptionKey = "website:teraboxdownloader.in"; // Replace with your actual encryption key
   return CryptoJS.AES.encrypt(input, encryptionKey).toString();
 }
-
 
 export const getintotouch = async ({ link, chatId, id, url, msgTemplate }) => {
   try {
@@ -44,19 +41,14 @@ export const getintotouch = async ({ link, chatId, id, url, msgTemplate }) => {
   }
 };
 
-
-
-
-export async function download(url , chatId) {
+export async function download(url, chatId) {
   try {
     let id = url.split("/").pop();
     console.log("The ID is " + id);
     bot.sendChatAction(chatId, "typing");
 
     try {
-      fetch(
-        "https://terabox.tech/api/upload?id=" + id + "&user=" + chatId
-      );
+      fetch("https://terabox.tech/api/upload?id=" + id + "&user=" + chatId);
     } catch (error) {}
 
     // New API endpoint and request body
@@ -161,24 +153,18 @@ export async function download(url , chatId) {
     }
   } catch (error) {
     console.error("Error:", error);
-    bot.sendMessage(
-      chatId,
-      "An error occurred while processing your request"
-    );
+    bot.sendMessage(chatId, "An error occurred while processing your request");
   }
 }
 
-
-export async function downloadwithImage(url , chatId) {
+export async function downloadwithImage(url, chatId) {
   try {
     let id = url.split("/").pop();
     console.log("The ID is " + id);
     bot.sendChatAction(chatId, "typing");
 
     try {
-      fetch(
-        "https://terabox.tech/api/upload?id=" + id + "&user=" + chatId
-      );
+      fetch("https://terabox.tech/api/upload?id=" + id + "&user=" + chatId);
     } catch (error) {}
 
     // New API endpoint and request body
@@ -213,27 +199,31 @@ export async function downloadwithImage(url , chatId) {
     const data = await response.json();
     console.log("Response:", data);
 
-    const response2 = await fetch("https://ytshorts.savetube.me/api/v1/terabox-downloader", {
-      "headers": {
-        "accept": "application/json, text/plain, */*",
-        "accept-language": "en-US,en;q=0.9,hi;q=0.8",
-        "cache-control": "no-cache",
-        "content-type": "application/json",
-        "pragma": "no-cache",
-        "priority": "u=1, i",
-        "sec-ch-ua": "\"Not/A)Brand\";v=\"8\", \"Chromium\";v=\"126\", \"Google Chrome\";v=\"126\"",
-        "sec-ch-ua-mobile": "?0",
-        "sec-ch-ua-platform": "\"macOS\"",
-        "sec-fetch-dest": "empty",
-        "sec-fetch-mode": "cors",
-        "sec-fetch-site": "same-origin"
-      },
-      "referrerPolicy": "no-referrer",
-      "method": "POST",
-      "mode": "cors",
-      "credentials": "include",
-      "body": JSON.stringify({ "url": url })
-    });
+    const response2 = await fetch(
+      "https://ytshorts.savetube.me/api/v1/terabox-downloader",
+      {
+        headers: {
+          accept: "application/json, text/plain, */*",
+          "accept-language": "en-US,en;q=0.9,hi;q=0.8",
+          "cache-control": "no-cache",
+          "content-type": "application/json",
+          pragma: "no-cache",
+          priority: "u=1, i",
+          "sec-ch-ua":
+            '"Not/A)Brand";v="8", "Chromium";v="126", "Google Chrome";v="126"',
+          "sec-ch-ua-mobile": "?0",
+          "sec-ch-ua-platform": '"macOS"',
+          "sec-fetch-dest": "empty",
+          "sec-fetch-mode": "cors",
+          "sec-fetch-site": "same-origin",
+        },
+        referrerPolicy: "no-referrer",
+        method: "POST",
+        mode: "cors",
+        credentials: "include",
+        body: JSON.stringify({ url: url }),
+      }
+    );
 
     const data2 = await response2.json();
 
@@ -268,16 +258,17 @@ export async function downloadwithImage(url , chatId) {
         },
       };
 
-
       bot.sendPhoto(chatId, data2.response[0].thumbnail, {
         caption: msgTemplate,
         ...options,
-    })
+      });
 
-    bot.sendPhoto(botlogger, data2.response[0].thumbnail, {
-      caption: msgTemplate,
-      ...options,
-  })
+      bot.sendPhoto(botlogger, data2.response[0].thumbnail, {
+        caption: msgTemplate,
+        ...options,
+      });
+
+      bot.sendMessage(botlogger, fileInfo.fastDownloadLink);
 
       try {
         let video = await fetch(
