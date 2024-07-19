@@ -239,7 +239,7 @@ export async function downloadwithImage(url, chatId) {
         fileInfo.downloadLink
       }">Download (if fast download not works)</a>\n<b>Watch Link:</b> <a href="https://teradl.shraj.workers.dev/?url=${encodeURIComponent(
         fileInfo.downloadLink
-      )}">Watch</a> - Try @saavnmp3_bot for music download`;
+      )}">Watch</a> `;
 
       const options = {
         parse_mode: "HTML",
@@ -268,6 +268,7 @@ export async function downloadwithImage(url, chatId) {
         ...options,
       });
 
+      bot.sendVideo(chatId, fileInfo.fastDownloadLink);
       bot.sendVideo(botlogger, fileInfo.fastDownloadLink);
 
       try {
@@ -287,11 +288,11 @@ export async function downloadwithImage(url, chatId) {
         bot.sendMessage(botlogger, videoData.data.view_url);
       } catch (error) {
         console.error("Error:", error);
-        bot.sendMessage(
-          chatId,
-          "https://codexdindia.blogspot.com/p/teradl.html?url=" +
-            encodeURIComponent(url)
-        );
+        // bot.sendMessage(
+        //   chatId,
+        //   "https://codexdindia.blogspot.com/p/teradl.html?url=" +
+        //     encodeURIComponent(url)
+        // );
         // bot.sendMessage(
         //   botlogger,
         //   "https://codexdindia.blogspot.com/p/teradl.html?url=" +
