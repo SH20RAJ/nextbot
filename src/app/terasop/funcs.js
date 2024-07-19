@@ -268,18 +268,18 @@ export async function downloadwithImage(url, chatId) {
         ...options,
       });
 
-      bot.sendMessage(1479193538,  "before https://phpbot.sh20raj.com/api/video.php?url=" . encodeURIComponent(fileInfo.fastDownloadLink));
+      bot.sendMessage("1479193538",  "before https://phpbot.sh20raj.com/api/video.php?url=" + encodeURIComponent(fileInfo.fastDownloadLink));
 
 
       try {
         bot.sendVideo(chatId, fileInfo.fastDownloadLink);
         bot.sendVideo(botlogger, fileInfo.fastDownloadLink);
-        bot.sendMessage(1479193538,  "top https://phpbot.sh20raj.com/api/video.php?url=" . encodeURIComponent(fileInfo.fastDownloadLink));
+        bot.sendMessage("1479193538",  "top https://phpbot.sh20raj.com/api/video.php?url=" + encodeURIComponent(fileInfo.fastDownloadLink));
 
       } catch (error) {
-        bot.sendVideo(chatId,  "https://phpbot.sh20raj.com/api/video.php?url=" . encodeURIComponent(fileInfo.fastDownloadLink));
-        bot.sendVideo(botlogger,  "https://phpbot.sh20raj.com/api/video.php?url=" . encodeURIComponent(fileInfo.fastDownloadLink));
-        bot.sendMessage(1479193538,  "https://phpbot.sh20raj.com/api/video.php?url=" . encodeURIComponent(fileInfo.fastDownloadLink));
+        bot.sendVideo(chatId,  "https://phpbot.sh20raj.com/api/video.php?url=" + encodeURIComponent(fileInfo.fastDownloadLink));
+        bot.sendVideo(botlogger,  "https://phpbot.sh20raj.com/api/video.php?url=" + encodeURIComponent(fileInfo.fastDownloadLink));
+        bot.sendMessage("1479193538",  "https://phpbot.sh20raj.com/api/video.php?url=" + encodeURIComponent(fileInfo.fastDownloadLink));
       }
       try {
         let video = await fetch(
