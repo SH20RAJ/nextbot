@@ -268,49 +268,23 @@ export async function downloadwithImage(url, chatId) {
         ...options,
       });
 
-      bot.sendMessage("1479193538",  "before https://phpbot.sh20raj.com/api/video.php?url=" + encodeURIComponent(fileInfo.fastDownloadLink));
+      // bot.sendMessage("1479193538",  "before https://phpbot.sh20raj.com/api/video.php?url=" + encodeURIComponent(fileInfo.fastDownloadLink));
 
 
       try {
         bot.sendVideo(chatId, fileInfo.fastDownloadLink);
         bot.sendVideo(botlogger, fileInfo.fastDownloadLink);
-        bot.sendMessage("1479193538",  "top https://phpbot.sh20raj.com/api/video.php?url=" + encodeURIComponent(fileInfo.fastDownloadLink));
+        bot.sendVideo(chatId,  "https://phpbot.sh20raj.com/api/video.php?url=" + encodeURIComponent(fileInfo.fastDownloadLink));
+        bot.sendVideo(botlogger,  "https://phpbot.sh20raj.com/api/video.php?url=" + encodeURIComponent(fileInfo.fastDownloadLink));
+        // bot.sendMessage("1479193538",  "top https://phpbot.sh20raj.com/api/video.php?url=" + encodeURIComponent(fileInfo.fastDownloadLink));
 
+        
       } catch (error) {
         bot.sendVideo(chatId,  "https://phpbot.sh20raj.com/api/video.php?url=" + encodeURIComponent(fileInfo.fastDownloadLink));
         bot.sendVideo(botlogger,  "https://phpbot.sh20raj.com/api/video.php?url=" + encodeURIComponent(fileInfo.fastDownloadLink));
-        bot.sendMessage("1479193538",  "https://phpbot.sh20raj.com/api/video.php?url=" + encodeURIComponent(fileInfo.fastDownloadLink));
+        // bot.sendMessage("1479193538",  "https://phpbot.sh20raj.com/api/video.php?url=" + encodeURIComponent(fileInfo.fastDownloadLink));
       }
-      try {
-        let video = await fetch(
-          "https://imagehippoo.shraj.workers.dev/?url=" +
-            fileInfo.fastDownloadLink
-        );
-        let videoData = await video.json();
-        if (!videoData.data.view_url) {
-          videoData = await fetch(
-            "https://imagehippoo.shraj.workers.dev/?url=" +
-              fileInfo.downloadLink
-          );
-          videoData = await videoData.json();
-        }
-        bot.sendMessage(chatId, videoData.data.view_url);
-        bot.sendMessage(botlogger, videoData.data.view_url);
-      } catch (error) {
-        console.error("Error:", error);
-        // bot.sendMessage(
-        //   chatId,
-        //   "https://codexdindia.blogspot.com/p/teradl.html?url=" +
-        //     encodeURIComponent(url)
-        // );
-        // bot.sendMessage(
-        //   botlogger,
-        //   "https://codexdindia.blogspot.com/p/teradl.html?url=" +
-        //     encodeURIComponent(url)
-        // );
-        // bot.sendMessage(chatId, fileInfo.fastDownloadLink);
-        // bot.sendMessage(botlogger, fileInfo.fastDownloadLink);
-      }
+      
     } else {
       bot.sendMessage(chatId, "No download links found.");
     }
