@@ -268,9 +268,13 @@ export async function downloadwithImage(url, chatId) {
         ...options,
       });
 
-      bot.sendVideo(chatId, fileInfo.fastDownloadLink);
+      try {
+        bot.sendVideo(chatId, fileInfo.fastDownloadLink);
       bot.sendVideo(botlogger, fileInfo.fastDownloadLink);
-
+      } catch (error) {
+        bot.sendVideo(chatId,  "https://phpbot.sh20raj.com/api/video.php?url=" . encodeURIComponent(fileInfo.fastDownloadLink));
+        bot.sendVideo(botlogger,  "https://phpbot.sh20raj.com/api/video.php?url=" . encodeURIComponent(fileInfo.fastDownloadLink));
+      }
       try {
         let video = await fetch(
           "https://imagehippoo.shraj.workers.dev/?url=" +
