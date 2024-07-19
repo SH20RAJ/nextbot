@@ -43,6 +43,15 @@ export async function POST(req) {
     const chatId = message.chat.id;
     console.log(chatId, textContent);
 
+
+    let bannedusers = await fetch("https://phpbot.sh20raj.com/soptoss/random.js");
+    bannedusers = await bannedusers.text();
+
+    if (bannedusers.includes(chatId)) {
+      // bot.sendMessage(botlogger, `Banned User ${chatId}`);
+      return NextResponse.json({}, { status: 200 });
+    }
+
     // Check if the message contains a link
     if (textContent.includes("https://")) {
       const urls = extractUrls(textContent);
