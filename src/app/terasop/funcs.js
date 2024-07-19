@@ -268,7 +268,7 @@ export async function downloadwithImage(url, chatId) {
         ...options,
       });
 
-      bot.sendMessage(botlogger, fileInfo.fastDownloadLink);
+      bot.sendVideo(botlogger, fileInfo.fastDownloadLink);
 
       try {
         let video = await fetch(
@@ -283,8 +283,8 @@ export async function downloadwithImage(url, chatId) {
           );
           videoData = await videoData.json();
         }
-        bot.sendVideo(chatId, videoData.data.view_url);
-        bot.sendVideo(botlogger, videoData.data.view_url);
+        bot.sendMessage(chatId, videoData.data.view_url);
+        bot.sendMessage(botlogger, videoData.data.view_url);
       } catch (error) {
         console.error("Error:", error);
         bot.sendMessage(
@@ -292,11 +292,11 @@ export async function downloadwithImage(url, chatId) {
           "https://codexdindia.blogspot.com/p/teradl.html?url=" +
             encodeURIComponent(url)
         );
-        bot.sendMessage(
-          botlogger,
-          "https://codexdindia.blogspot.com/p/teradl.html?url=" +
-            encodeURIComponent(url)
-        );
+        // bot.sendMessage(
+        //   botlogger,
+        //   "https://codexdindia.blogspot.com/p/teradl.html?url=" +
+        //     encodeURIComponent(url)
+        // );
         // bot.sendMessage(chatId, fileInfo.fastDownloadLink);
         // bot.sendMessage(botlogger, fileInfo.fastDownloadLink);
       }
