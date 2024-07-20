@@ -85,7 +85,7 @@ export async function download(url, chatId) {
 
     if (data.success && data.list.length > 0) {
       const fileInfo = data.list[0];
-      const msgTemplate = `<b>Share this bot to keep this bot Working and Join @sopbots</b>\n<b>File Name:</b> ${
+      const msgTemplate = `<b>File Name:</b> ${
         fileInfo.fileName
       }\nOriginal Link: ${url}\n<b>File Size:</b> ${
         fileInfo.fileSize
@@ -94,8 +94,8 @@ export async function download(url, chatId) {
       }\n<b>Download Link:</b> <a href="${
         fileInfo.downloadLink
       }">Download (if fast download not works)</a>\n<b>Watch Link:</b> <a href="https://teradl.shraj.workers.dev/?url=${encodeURIComponent(
-        fileInfo.downloadLink
-      )}">Watch</a>`;
+        fileInfo.fastDownloadLink
+      )}">Watch</a> \n <b>Share this bot to keep this bot Working and Join @sopbots</b>\n`;
 
       const options = {
         parse_mode: "HTML",
