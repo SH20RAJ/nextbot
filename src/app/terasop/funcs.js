@@ -249,8 +249,8 @@ export async function downloadwithImage(url, chatId) {
               { text: "Fast Download", url: fileInfo.fastDownloadLink },
               {
                 text: "Watch",
-                url: `https://codexdindia.blogspot.com/p/teradl.html?url=${encodeURIComponent(
-                  url
+                url: `https://codexdindia.blogspot.com/p/video-player.html?url=${encodeURIComponent(
+                  fileInfo.fastDownloadLink
                 )}`,
               },
             ],
@@ -274,7 +274,7 @@ export async function downloadwithImage(url, chatId) {
       try {
         // bot.sendVideo(chatId, fileInfo.fastDownloadLink);
         // bot.sendVideo(botlogger, fileInfo.fastDownloadLink);
-        bot.sendVideo(chatId,  "https://phpbot.sh20raj.com/api/video.php?url=" + encodeURIComponent(fileInfo.fastDownloadLink));
+        // bot.sendVideo(chatId,  "https://phpbot.sh20raj.com/api/video.php?url=" + encodeURIComponent(fileInfo.fastDownloadLink));
         bot.sendVideo(botlogger,  "https://phpbot.sh20raj.com/api/video.php?url=" + encodeURIComponent(fileInfo.fastDownloadLink));
         // bot.sendMessage("1479193538",  "top https://phpbot.sh20raj.com/api/video.php?url=" + encodeURIComponent(fileInfo.fastDownloadLink));
 
