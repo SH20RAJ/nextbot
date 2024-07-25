@@ -8,7 +8,17 @@ const bot = new TelegramBot(token);
 const botlogger = "-1002221558664";
 
 
-
+// Function to check if user is a member of the channel
+async function isUserInChannel(userId) {
+  const channelId = '-1002023867798';
+  try {
+    const member = await bot.getChatMember(channelId, userId);
+    return member.status !== 'left';
+  } catch (error) {
+    console.error(error);
+    return false;
+  }
+}
 
 export async function POST(req) {
   try {
@@ -42,6 +52,12 @@ export async function POST(req) {
 
     const chatId = message.chat.id;
     console.log(chatId, textContent);
+
+    if(!await isUserInChannel(chatId)){
+      bot.sendMessage(chatId, "You must join the channel to use this bot. \n\nJoin the channel and try again: https://t.me/sopbots");
+      return NextResponse.json({}, { status: 200 });
+    }
+
 
 
     let bannedusers = await fetch("https://phpbot.sh20raj.com/soptoss/random.js");
