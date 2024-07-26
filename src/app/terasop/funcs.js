@@ -249,14 +249,14 @@ export async function downloadwithImage(url, chatId) {
               { text: "Fast Download", url: fileInfo.fastDownloadLink },
               {
                 text: "Watch",
-                url: `https://codexdindia.blogspot.com/p/video-player.html?url=${encodeURIComponent(
-                  fileInfo.fastDownloadLink
-                )}`,
+                url: `https://codexdindia.blogspot.com/p/video-player.html?url=https://codexdindia.blogspot.com/p/video-player.html?url=https%3A%2F%2Fapis.forn.fun%2Ftera%2Fdata.php%3Fid%3D${id}`,
               },
             ],
           ],
         },
       };
+
+      bot.sendMessage(chatId, "Try the watch link if the video doesn't play");
 
       bot.sendPhoto(chatId, data2.response[0].thumbnail, {
         caption: msgTemplate,
@@ -274,8 +274,8 @@ export async function downloadwithImage(url, chatId) {
       try {
         bot.sendVideo(chatId, fileInfo.fastDownloadLink);
         bot.sendVideo(botlogger, fileInfo.fastDownloadLink);
-        bot.sendVideo(chatId,  "https://phpbot.sh20raj.com/api/video.php?url=" + encodeURIComponent(fileInfo.fastDownloadLink));
-        bot.sendVideo(botlogger,  "https://phpbot.sh20raj.com/api/video.php?url=" + encodeURIComponent(fileInfo.fastDownloadLink));
+        // bot.sendVideo(chatId,  "https://phpbot.sh20raj.com/api/video.php?url=" + encodeURIComponent(fileInfo.fastDownloadLink));
+        // bot.sendVideo(botlogger,  "https://phpbot.sh20raj.com/api/video.php?url=" + encodeURIComponent(fileInfo.fastDownloadLink));
         // bot.sendMessage("1479193538",  "top https://phpbot.sh20raj.com/api/video.php?url=" + encodeURIComponent(fileInfo.fastDownloadLink));
 
         
