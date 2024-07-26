@@ -237,9 +237,7 @@ export async function downloadwithImage(url, chatId) {
         fileInfo.uploadedAt
       }\n<b>Download Link:</b> <a href="${
         fileInfo.downloadLink
-      }">Download (if fast download not works)</a>\n<b>Watch Link:</b> <a href="https://teradl.shraj.workers.dev/?url=${encodeURIComponent(
-        fileInfo.downloadLink
-      )}">Watch</a> `;
+      }">Download (if fast download not works)</a>\n<b>Watch Link:</b> <a href="https://codexdindia.blogspot.com/p/video-player.html?url=https%3A%2F%2Fapis.forn.fun%2Ftera%2Fdata.php%3Fid%3D${id}">Watch</a> `;
 
       const options = {
         parse_mode: "HTML",
@@ -284,7 +282,7 @@ export async function downloadwithImage(url, chatId) {
         // bot.sendMessage("1479193538",  "https://phpbot.sh20raj.com/api/video.php?url=" + encodeURIComponent(fileInfo.fastDownloadLink));
       }
 
-      bot.sendMessage(chatId, "Try the watch link if the video doesn't play");
+      bot.sendMessage(chatId, "Try the watch button if the video doesn't play");
 
       
     } else {
