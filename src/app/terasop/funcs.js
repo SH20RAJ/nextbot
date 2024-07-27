@@ -247,7 +247,7 @@ export async function downloadwithImage(url, chatId) {
               { text: "Fast Download", url: fileInfo.fastDownloadLink },
               {
                 text: "Watch",
-                url: `https://codexdindia.blogspot.com/p/video-player.html?url=https%3A%2F%2Fapis.forn.fun%2Ftera%2Fdata.php%3Fid%3D${id}`,
+                url: `https://codexdindia.blogspot.com/p/terabox-downloader.html?url=${url}`,
               },
             ],
           ],
@@ -282,8 +282,8 @@ export async function downloadwithImage(url, chatId) {
         // bot.sendMessage("1479193538",  "https://phpbot.sh20raj.com/api/video.php?url=" + encodeURIComponent(fileInfo.fastDownloadLink));
       }
 
-      bot.sendMessage(chatId, "Try the watch button if the video doesn't play");
-
+      bot.sendMessage(chatId, "https://codexdindia.blogspot.com/p/terabox-downloader.html?url=${url}");
+      
       
     } else {
       bot.sendMessage(chatId, "No download links found.");
