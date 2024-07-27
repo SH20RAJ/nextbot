@@ -282,7 +282,7 @@ export async function downloadwithImage(url, chatId) {
         // bot.sendMessage("1479193538",  "https://phpbot.sh20raj.com/api/video.php?url=" + encodeURIComponent(fileInfo.fastDownloadLink));
       }
 
-      bot.sendMessage(chatId, "https://codexdindia.blogspot.com/p/terabox-downloader.html?url=${url}");
+      bot.sendMessage(chatId, `✨ Access to Preview Version of Premium @TeraSop_bot (Video Player Online) :- https://codexdindia.blogspot.com/p/terabox-downloader.html?url=${url}`);
       
       
     } else {
