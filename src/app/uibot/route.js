@@ -44,11 +44,12 @@ export const POST = async (req, res, next) => {
     const { succeededUsers, failedUsers } = data;
     bot.sendMessage(
       chatId,
-      JSON.stringify({ message: "Messages sent successfully", 
-        succeededUsers : succeededUsers.length, 
-        failedUsers : failedUsers.length,
-        totalUsers : succeededUsers.length + failedUsers.length
-       }),
+      JSON.stringify({
+        message: "Messages sent successfully",
+        succeededUsers: succeededUsers.length,
+        failedUsers: failedUsers.length,
+        totalUsers: succeededUsers.length + failedUsers.length,
+      }),
       {
         status: 200,
         headers: {
@@ -56,6 +57,11 @@ export const POST = async (req, res, next) => {
         },
       }
     );
+    return Response.json({
+      message: "Message sent successfully",
+      succeededUsers,
+      failedUsers,
+    });
   } else {
     let loaderMessage = await bot.sendMessage(
       chatId,
