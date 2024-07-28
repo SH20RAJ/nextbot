@@ -111,7 +111,7 @@ export async function POST(req) {
       );
 
       // sharing message for frineds message to join the bot with the benefits of bot and refferal link
-      bot.sendMessage(chatId, "🎉 Free Download and Stream Terabox Videos🎉 \n\nCheckout :-  \n " + referralLink);
+      bot.sendMessage(chatId, "🎉 Free Download and Stream Terabox Videos 🎉 \n\nCheckout :-  \n " + referralLink);
 
       
 
