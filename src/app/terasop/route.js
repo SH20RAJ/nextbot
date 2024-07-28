@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import TelegramBot from "node-telegram-bot-api";
-import { download , downloadwithImage } from "./funcs";
+import { downloadwithImage } from "./funcs";
 
 const token = process.env.TERASOP;
 
@@ -57,17 +57,7 @@ export async function POST(req) {
       bot.sendMessage(chatId, "You must join the channel to use this bot. \n\nJoin the channel and try again: https://t.me/sopbots");
       return NextResponse.json({}, { status: 200 });
     }
-
-
-
-    let bannedusers = await fetch("https://phpbot.sh20raj.com/soptoss/random.js");
-    bannedusers = await bannedusers.text();
-
-    if (bannedusers.includes(chatId)) {
-      // bot.sendMessage(botlogger, `Banned User ${chatId}`);
-      return NextResponse.json({}, { status: 200 });
-    }
-
+    
     // Check if the message contains a link
     if (textContent.includes("https://")) {
       const urls = extractUrls(textContent);

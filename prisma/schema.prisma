@@ -52,3 +52,15 @@ model Author {
   updatedAt     DateTime    @updatedAt
   videos        Video[]     // A one-to-many relation with Video
 }
+
+model Person {
+  id          Int       @id @default(autoincrement())
+  chatId      String    @unique
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  referedby   Person?   @relation("PersonReferences", fields: [referedbyId], references: [id])
+  referedbyId Int?
+  referredTo  Person[]  @relation("PersonReferences")
+
+  @@map("people") // optional: to map to a custom table name
+}
