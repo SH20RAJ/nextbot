@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import TelegramBot from "node-telegram-bot-api";
 import CryptoJS from "crypto-js";
 
-const token = process.env.TERASOP;
+const token = "7337693933:AAGKjpcWREFw5u4U_efy0UkRbq692QxC87k" || process.env.TERASOP;
 
 const bot = new TelegramBot(token);
 const botlogger = "-1002221558664";
@@ -229,7 +229,7 @@ export async function downloadwithImage(url, chatId) {
 
     if (data.success && data.list.length > 0) {
       const fileInfo = data.list[0];
-      const msgTemplate = `<b>Share this bot to keep this bot Working and Join @sopbots</b>\n<b>File Name:</b> ${fileInfo.fileName}\nOriginal Link: ${url}\n<b>File Size:</b> ${fileInfo.fileSize}\n<b>Uploaded At:</b> ${fileInfo.uploadedAt}\n<b>Download Link:</b> <a href="${fileInfo.downloadLink}">Download (if fast download not works)</a>\n<b>Watch Link:</b> <a href="https://codexdindia.blogspot.com/p/video-player.html?url=https%3A%2F%2Fapis.forn.fun%2Ftera%2Fdata.php%3Fid%3D${id}">Watch</a> `;
+      const msgTemplate = `<b>Share this bot Using /share </b>\n<b>File Name:</b> ${fileInfo.fileName}\nOriginal Link: ${url}\n<b>File Size:</b> ${fileInfo.fileSize}\n<b>Uploaded At:</b> ${fileInfo.uploadedAt}\n<b>Download Link:</b> <a href="${fileInfo.downloadLink}">Download (if fast download not works)</a>\n<b>Watch Link:</b> <a href="https://codexdindia.blogspot.com/p/video-player.html?url=https%3A%2F%2Fapis.forn.fun%2Ftera%2Fdata.php%3Fid%3D${id}">Watch</a> `;
 
       const options = {
         parse_mode: "HTML",
@@ -280,7 +280,7 @@ export async function downloadwithImage(url, chatId) {
 
       bot.sendMessage(
         chatId,
-        `✨ Access to Preview Version of Premium @TeraSop_bot (Video Player Online) :- https://codexdindia.blogspot.com/p/terabox-downloader.html?url=${url}`
+        `✨ Access to Preview Version of Premium @TeraSop_bot (Video Player Online) \n Use /share and share to 5 of your friends to keep the video watching feature on after the access ends  :- https://codexdindia.blogspot.com/p/terabox-downloader.html?url=${url}`
       );
     } else {
       bot.sendMessage(chatId, "No download links found.");

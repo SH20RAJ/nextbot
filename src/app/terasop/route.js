@@ -1,12 +1,12 @@
 import { NextResponse } from "next/server";
 import TelegramBot from "node-telegram-bot-api";
 import { downloadwithImage } from "./funcs";
+import { PrismaClient } from '@prisma/client';
 
-const token = process.env.TERASOP;
-
+const token = process.env.TESTBOT;
 const bot = new TelegramBot(token);
 const botlogger = "-1002221558664";
-
+const prisma = new PrismaClient();
 
 // Function to check if user is a member of the channel
 async function isUserInChannel(userId) {
@@ -21,6 +21,7 @@ async function isUserInChannel(userId) {
 }
 
 export async function POST(req) {
+
   try {
     const body = await req.json();
 
@@ -35,55 +36,106 @@ export async function POST(req) {
       }
     );
 
-    // Check if the update contains a message
     if (!body.message) {
       console.log("No message in the update");
-      return NextResponse.json({}, { status: 200 }); // Acknowledge the request anyway
+      return NextResponse.json({}, { status: 200 });
     }
 
-    // Initialize message variables
     const message = body.message;
+    const chatId = message.chat.id;
     let textContent = message.text || (message.caption ? message.caption : "");
 
     if (!textContent) {
       console.log("No text or caption in the message");
-      return NextResponse.json({}, { status: 200 }); // Acknowledge the request anyway
+      return NextResponse.json({}, { status: 200 });
     }
 
-    const chatId = message.chat.id;
     console.log(chatId, textContent);
 
-    if(!await isUserInChannel(chatId)){
+    // Check if user is a member of the channel
+    if (!await isUserInChannel(chatId)) {
       bot.sendMessage(chatId, "You must join the channel to use this bot. \n\nJoin the channel and try again: https://t.me/sopbots");
       return NextResponse.json({}, { status: 200 });
+
     }
-    
-    // Check if the message contains a link
-    if (textContent.includes("https://")) {
-      const urls = extractUrls(textContent);
-      // Check if the URL is from teraboxapp.com
-      if (urls) {
-        urls.map((url) => {
-          // download(url , chatId);
-          downloadwithImage(url , chatId);
-        });
-      }
 
-      
+    if (textContent === "/start") {
 
-      return NextResponse.json({}, { status: 200 });
-      
-    } else if (textContent === "hi") {
-      // Send "Hi" as a response
-      bot.sendMessage(chatId, "Hi");
-    } else if (textContent === "/start") {
-      // Send the start message as a response
       bot.sendMessage(
         chatId,
         "Send/Forward me a Terabox Link and I will give you the download link.... 🚀 \n Send Example Link :- https://teraboxapp.com/s/1EWkWY66FhZKS2WfxwBgd0Q"
       );
+
+      return NextResponse.json({}, { status: 200 });
+    } 
+
+    let referedbyId = null;
+
+    // Check if the message contains the start command with a referral chatId
+    if (textContent.startsWith("/start")) {
+      const referralChatId = extractReferralChatId(textContent);
+
+      if(referralChatId == chatId || referralChatId == null){ bot.sendMessage(chatId, "You can't refer yourself 🤦‍♂️");
+        return NextResponse.json({}, { status: 200 });
+      }
+      const referer = await prisma.person.findUnique({
+        where: { chatId: referralChatId }
+      });
+      if (referer) {
+        referedbyId = referer.chatId;
+      }
+
+      let person = await prisma.person.findUnique({
+        where: { chatId: String(chatId) }
+      });
+      if (!person) {
+        person = await prisma.person.create({
+          data: { chatId: String(chatId), referedbyId: Number(referedbyId) }
+        });
+      }
+
+      bot.sendMessage(chatId, "Welcome to Terasop Bot! 🚀 \n You are successfully refereed by " + referedbyId + "👍 \n Type /share to share other users your own link 🎶");
+    }
+
+
+
+    // Handle the share command
+    if (textContent === "/share") {
+      const referralLink = `https://t.me/terasop_bot?start=${chatId}`;
+      const referralCount = await prisma.person.count({
+        where: { referedbyId: Number(chatId) }
+      });
+      // Send the referral link
+      bot.sendMessage(chatId,
+        `🎉 Share this link to your friends and get benifits for each friend who joins using your link! 🎉 \n\n ${referralLink} \n\n You have referred ${referralCount} users.`
+      );
+
+      // sharing message for frineds message to join the bot with the benifits of bot and refferal link
+      bot.sendMessage(chatId, "🎉 Free Download and Stream Terabox Videos🎉 \n\nCheckout :-  \n " + referralLink);
+
+      
+
+        // Log the referral
+        bot.sendMessage(botlogger, `#reffers User ${chatId} has referred ${referralCount} users.`);
+
+
+
+
+      return NextResponse.json({}, { status: 200 });
+    }
+
+    // Check if the message contains a link
+    if (textContent.includes("https://")) {
+      const urls = extractUrls(textContent);
+      if (urls) {
+        urls.map((url) => {
+          downloadwithImage(url, chatId);
+        });
+      }
+      return NextResponse.json({}, { status: 200 });
+    } else if (textContent === "hi") {
+      bot.sendMessage(chatId, "Hi");
     } else {
-      // Send a default response
       bot.sendMessage(
         chatId,
         "Send/Forward me a Terabox Link and I will give you the download link.... 🚀 \n Send Example Link :- https://teraboxapp.com/s/1EWkWY66FhZKS2WfxwBgd0Q"
@@ -98,6 +150,8 @@ export async function POST(req) {
       { status: 500 }
     );
   }
+
+  return NextResponse.json({}, { status: 200 });
 }
 
 export const GET = () => {
@@ -106,8 +160,14 @@ export const GET = () => {
 
 // Function to extract URL from message or caption
 function extractUrls(text) {
-  // Regular expression to match URLs with various formats
   const regex = /(https?:\/\/[^\s]+)/g;
   const matches = text.match(regex);
   return matches ? matches : [];
+}
+
+// Function to extract referral chatId from the start command
+function extractReferralChatId(text) {
+  const startCommandRegex = /\/start (\d+)/;
+  const match = text.match(startCommandRegex);
+  return match ? match[1] : null;
 }

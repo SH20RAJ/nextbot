@@ -58,9 +58,5 @@ model Person {
   chatId      String    @unique
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
-  referedby   Person?   @relation("PersonReferences", fields: [referedbyId], references: [id])
-  referedbyId Int?
-  referredTo  Person[]  @relation("PersonReferences")
-
-  @@map("people") // optional: to map to a custom table name
+  referedbyId Int?      // For the referral system
 }
