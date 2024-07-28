@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import TelegramBot from "node-telegram-bot-api";
 import CryptoJS from "crypto-js";
 
-const token = "7337693933:AAGKjpcWREFw5u4U_efy0UkRbq692QxC87k" || process.env.TERASOP;
+const token = process.env.TERASOP;
 
 const bot = new TelegramBot(token);
 const botlogger = "-1002221558664";

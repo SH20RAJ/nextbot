@@ -3,7 +3,7 @@ import TelegramBot from "node-telegram-bot-api";
 import { downloadwithImage } from "./funcs";
 import { PrismaClient } from '@prisma/client';
 
-const token = process.env.TESTBOT;
+const token = process.env.TERASOP;
 const bot = new TelegramBot(token);
 const botlogger = "-1002221558664";
 const prisma = new PrismaClient();
