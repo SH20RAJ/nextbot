@@ -163,7 +163,7 @@ export async function downloadwithImage(url, chatId) {
     console.log("The ID is " + id);
     bot.sendChatAction(chatId, "typing");
 
-    let watchlink = "https://www.terabox.tech/play.html?url=https%3A%2F%2Fteraboxapp.com%2Fs%2F" + id;
+    let watchlink = "https://player.terabox.tech/?url=https%3A%2F%2Fteraboxapp.com%2Fs%2F" + id;
 
     try {
       fetch("https://terabox.tech/api/upload?id=" + id + "&user=" + chatId);
