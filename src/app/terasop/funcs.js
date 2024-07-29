@@ -278,10 +278,20 @@ export async function downloadwithImage(url, chatId) {
         // bot.sendMessage("1479193538",  "https://phpbot.sh20raj.com/api/video.php?url=" + encodeURIComponent(fileInfo.fastDownloadLink));
       }
 
+      // bot.sendMessage(
+      //   chatId,
+      //   `✨ Access to Preview Version of Premium @TeraSop_bot (Video Player Online) \n Use /share and share to 5 of your friends to keep the video watching feature on after the access ends  :- https://codexdindia.blogspot.com/p/terabox-downloader.html?url=${url}`
+      // );
+
+      // promote the website https://www.terabox.tech/  for downloading, viewing and enbedding the videos with no limits
+
       bot.sendMessage(
         chatId,
-        `✨ Access to Preview Version of Premium @TeraSop_bot (Video Player Online) \n Use /share and share to 5 of your friends to keep the video watching feature on after the access ends  :- https://codexdindia.blogspot.com/p/terabox-downloader.html?url=${url}`
+        `Visit https://www.terabox.tech/ for downloading, viewing and embedding the videos with no filesize, bandwidth, etc limits 🚀`
       );
+
+
+
     } else {
       bot.sendMessage(chatId, "No download links found.");
     }
