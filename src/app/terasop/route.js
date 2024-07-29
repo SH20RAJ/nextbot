@@ -157,7 +157,7 @@ export async function POST(req) {
         `🎉 Congrats! Your friend ${chatId} has joined the bot using your referral link! 🎉 \n
         You have referred ${referralCount} users. \n\n
         `, {
-          disable_web_page_preview : true;
+          disable_web_page_preview : true
         }
       );
 
