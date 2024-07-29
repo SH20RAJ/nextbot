@@ -81,14 +81,16 @@ export async function POST(req) {
       // Send the referral link
       bot.sendMessage(
         chatId,
-        `🎉 Share this link to your friends and get benefits for each friend who joins using your link! 🎉 \n\n ${referralLink} \n\n You have referred ${referralCount} users.`
+        `🎉 Share this link to your friends and get benefits for each friend who joins using your link! 🎉 \n\n ${referralLink} \n\n You have referred ${referralCount} users.`, { disable_web_page_preview : true}
       );
 
       // sharing message for frineds message to join the bot with the benefits of bot and refferal link
       bot.sendMessage(
         chatId,
-        "🎉 Free Download and Stream Terabox Videos 🎉 \n\nCheckout :-  \n " +
-          referralLink
+        "🎉 Free Download and Stream Terabox Videos 🎉 \n\nCheckout :-  \n" +
+          referralLink, {
+            disable_web_page_preview : true
+          }
       );
 
       // Log the referral
@@ -108,9 +110,10 @@ export async function POST(req) {
       bot.sendMessage(
         chatId,
         `Share this bot with at least 1 friends group to get Access 🚀\nUse /share to get the details of how many persons you have shared the link and get your sharing link \n 
-        \n
-        Your Referral Link: https://t.me/terasop_bot?start=${chatId}
-        `
+        \nYour Referral Link: https://t.me/terasop_bot?start=${chatId}
+        `, {
+          disable_web_page_preview : true
+        }
       );
       return NextResponse.json({}, { status: 200 });
     }
@@ -153,7 +156,9 @@ export async function POST(req) {
         referedbyId,
         `🎉 Congrats! Your friend ${chatId} has joined the bot using your referral link! 🎉 \n
         You have referred ${referralCount} users. \n\n
-        `
+        `, {
+          disable_web_page_preview : true;
+        }
       );
 
       // Log the referral
