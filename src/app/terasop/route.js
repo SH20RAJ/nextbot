@@ -72,11 +72,39 @@ export async function POST(req) {
       return NextResponse.json({}, { status: 200 });
     }
 
+    // Handle the share command
+    if (textContent === "/share") {
+      const referralLink = `https://t.me/terasop_bot?start=${chatId}`;
+      const referralCount = await prisma.person.count({
+        where: { referedbyId: Number(chatId) },
+      });
+      // Send the referral link
+      bot.sendMessage(
+        chatId,
+        `🎉 Share this link to your friends and get benefits for each friend who joins using your link! 🎉 \n\n ${referralLink} \n\n You have referred ${referralCount} users.`
+      );
+
+      // sharing message for frineds message to join the bot with the benefits of bot and refferal link
+      bot.sendMessage(
+        chatId,
+        "🎉 Free Download and Stream Terabox Videos 🎉 \n\nCheckout :-  \n " +
+          referralLink
+      );
+
+      // Log the referral
+      bot.sendMessage(
+        botlogger,
+        `#reffers User ${chatId} has referred ${referralCount} users.`
+      );
+
+      return NextResponse.json({}, { status: 200 });
+    }
+
     const referralCount = await prisma.person.count({
       where: { referedbyId: Number(chatId) },
     });
 
-    if(referralCount < 1) {
+    if (referralCount < 1) {
       bot.sendMessage(
         chatId,
         "Share this bot with at least 1 friends group to get Access 🚀\nUse /share to get the details of how many persons you have shared the link and get your sharing link"
@@ -122,34 +150,6 @@ export async function POST(req) {
         soplogger,
         `#reffers User ${chatId} has been referred by ${referedbyId}.`
       );
-    }
-
-    // Handle the share command
-    if (textContent === "/share") {
-      const referralLink = `https://t.me/terasop_bot?start=${chatId}`;
-      const referralCount = await prisma.person.count({
-        where: { referedbyId: Number(chatId) },
-      });
-      // Send the referral link
-      bot.sendMessage(
-        chatId,
-        `🎉 Share this link to your friends and get benefits for each friend who joins using your link! 🎉 \n\n ${referralLink} \n\n You have referred ${referralCount} users.`
-      );
-
-      // sharing message for frineds message to join the bot with the benefits of bot and refferal link
-      bot.sendMessage(
-        chatId,
-        "🎉 Free Download and Stream Terabox Videos 🎉 \n\nCheckout :-  \n " +
-          referralLink
-      );
-
-      // Log the referral
-      bot.sendMessage(
-        botlogger,
-        `#reffers User ${chatId} has referred ${referralCount} users.`
-      );
-
-      return NextResponse.json({}, { status: 200 });
     }
 
     // Check if the message contains a link
