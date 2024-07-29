@@ -72,6 +72,18 @@ export async function POST(req) {
       return NextResponse.json({}, { status: 200 });
     }
 
+    const referralCount = await prisma.person.count({
+      where: { referedbyId: Number(chatId) },
+    });
+
+    if(referralCount < 1) {
+      bot.sendMessage(
+        chatId,
+        "Share this bot with at least 1 friends group to get Access 🚀\nUse /share to get the details of how many persons you have shared the link and get your sharing link"
+      );
+      return NextResponse.json({}, { status: 200 });
+    }
+
     let referedbyId = null;
 
     // Check if the message contains the start command with a referral chatId
