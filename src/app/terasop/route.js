@@ -148,6 +148,14 @@ export async function POST(req) {
           "👍 \n Type /share to share other users your own link 🎶"
       );
 
+      // send message to the refered person
+      bot.sendMessage(
+        referedbyId,
+        `🎉 Congrats! Your friend ${chatId} has joined the bot using your referral link! 🎉 \n
+        You have referred ${referralCount} users. \n\n
+        `
+      );
+
       // Log the referral
       bot.sendMessage(
         soplogger,
