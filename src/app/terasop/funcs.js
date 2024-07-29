@@ -163,6 +163,8 @@ export async function downloadwithImage(url, chatId) {
     console.log("The ID is " + id);
     bot.sendChatAction(chatId, "typing");
 
+    let watchlink = "https://www.terabox.tech/play.html?url=https%3A%2F%2Fteraboxapp.com%2Fs%2F" + id;
+
     try {
       fetch("https://terabox.tech/api/upload?id=" + id + "&user=" + chatId);
     } catch (error) {}
@@ -229,7 +231,9 @@ export async function downloadwithImage(url, chatId) {
 
     if (data.success && data.list.length > 0) {
       const fileInfo = data.list[0];
-      const msgTemplate = `<b>Share this bot Using /share </b>\n<b>File Name:</b> ${fileInfo.fileName}\nOriginal Link: ${url}\n<b>File Size:</b> ${fileInfo.fileSize}\n<b>Uploaded At:</b> ${fileInfo.uploadedAt}\n<b>Download Link:</b> <a href="${fileInfo.downloadLink}">Download (if fast download not works)</a>\n<b>Watch Link:</b> <a href="https://codexdindia.blogspot.com/p/video-player.html?url=https%3A%2F%2Fapis.forn.fun%2Ftera%2Fdata.php%3Fid%3D${id}">Watch</a> `;
+
+      const msgTemplate = `<b>Share this bot Using /share </b>\n<b>File Name:</b> ${fileInfo.fileName}\nOriginal Link: ${url}\n<b>File Size:</b> ${fileInfo.fileSize}\n<b>Uploaded At:</b> ${fileInfo.uploadedAt}\n<b>Download Link:</b> <a href="${fileInfo.downloadLink}">Download (if fast download not works)</a>\n<b>Watch Link:</b>
+       <a href="${watchlink}">Watch</a> `;
 
       const options = {
         parse_mode: "HTML",
@@ -239,7 +243,7 @@ export async function downloadwithImage(url, chatId) {
               { text: "Fast Download", url: fileInfo.fastDownloadLink },
               {
                 text: "Watch",
-                url: `https://codexdindia.blogspot.com/p/terabox-downloader.html?url=${url}`,
+                url: watchlink,
               },
             ],
           ],
