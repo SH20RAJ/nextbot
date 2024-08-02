@@ -291,13 +291,13 @@ export async function downloadwithImage(url, chatId) {
 
       bot.sendMessage(
         chatId,
-        `Visit https://www.terabox.tech/ for downloading, viewing and embedding the videos with no filesize, bandwidth, etc limits 🚀`
+        `Visit https://www.terabox.tech/ for downloading, viewing and embedding the videos with no filesize, bandwidth, etc limits 🚀 \n Link to Your Video :- ${watchlink}`
       );
 
 
 
     } else {
-      bot.sendMessage(chatId, "No download links found.");
+      // bot.sendMessage(chatId, "No download links found.");
     }
   } catch (error) {
     console.error("Error:", error);
