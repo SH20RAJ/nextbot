@@ -135,7 +135,7 @@ export async function POST(req) {
       return NextResponse.json({}, { status: 200 });
     }
 
-    const referralCount = await prisma.person.count({
+    let referralCount = await prisma.person.count({
       where: { referedbyId: Number(chatId) },
     });
 
@@ -185,11 +185,15 @@ export async function POST(req) {
           "👍 \n Type /share to share other users your own link 🎶"
       );
 
+      const referralCount = await prisma.person.count({
+        where: { referedbyId: Number(referedbyId) },
+      });
+
       // send message to the refered person
       bot.sendMessage(
         referedbyId,
-        `🎉 Congrats! Your friend ${chatId} has joined the bot using your referral link! 🎉 \n
-        You have referred ${referralCount} users. \n\n
+        `🎉 Congrats! Your friend ${chatId} has joined the bot using your referral link! 🎉 
+        \nYou have referred ${referralCount} users. \n\n
         `,
         {
           disable_web_page_preview: true,
