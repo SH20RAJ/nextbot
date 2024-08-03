@@ -67,7 +67,38 @@ export async function POST(req) {
         "Send/Forward me a Terabox Link and I will give you the download link.... 🚀 \n Send Example Link :- https://teraboxapp.com/s/1EWkWY66FhZKS2WfxwBgd0Q"
       );
 
-      bot.sendMessage(soplogger, ` #start User ${chatId} has started the bot.`);
+      let user = await prisma.person.findUnique({
+        where: { chatId: String(chatId) },
+      });
+
+      if (!user) {
+        user = await prisma.person.create({
+          data: { chatId: String(chatId) },
+        });
+
+        bot.sendMessage(
+          soplogger,
+          `#newuser User ${chatId} has started the bot.`
+        );
+
+        // welcome message to the user
+
+        bot.sendMessage(
+          chatId,
+          "Welcome to Terasop Bot! 🚀 \n\nSend/Forward me a Terabox Link and I will give you the download link.... 🚀 \n Send Example Link :- https://teraboxapp.com/s/1EWkWY66FhZKS2WfxwBgd0Q"
+        );
+
+        bot.sendMessage(
+          chatId,
+          "🎉 Share this link to your friends and get benefits for each friend who joins using your link! 🎉 \n\n https://t.me/terasop_bot?start=" +
+            chatId
+        );
+      } else {
+        bot.sendMessage(
+          soplogger,
+          ` #restart User ${chatId} has Restarted the bot.`
+        );
+      }
 
       return NextResponse.json({}, { status: 200 });
     }
@@ -81,16 +112,18 @@ export async function POST(req) {
       // Send the referral link
       bot.sendMessage(
         chatId,
-        `🎉 Share this link to your friends and get benefits for each friend who joins using your link! 🎉 \n\n ${referralLink} \n\n You have referred ${referralCount} users.`, { disable_web_page_preview : true}
+        `🎉 Share this link to your friends and get benefits for each friend who joins using your link! 🎉 \n\n ${referralLink} \n\n You have referred ${referralCount} users.`,
+        { disable_web_page_preview: true }
       );
 
       // sharing message for frineds message to join the bot with the benefits of bot and refferal link
       bot.sendMessage(
         chatId,
         "🎉 Free Download and Stream Terabox Videos 🎉 \n\nCheckout :-  \n" +
-          referralLink, {
-            disable_web_page_preview : true
-          }
+          referralLink,
+        {
+          disable_web_page_preview: true,
+        }
       );
 
       // Log the referral
@@ -111,8 +144,9 @@ export async function POST(req) {
         chatId,
         `Share this bot with at least 1 friends group to get Access 🚀\nUse /share to get the details of how many persons you have shared the link and get your sharing link \n 
         \nYour Referral Link: https://t.me/terasop_bot?start=${chatId}
-        `, {
-          disable_web_page_preview : true
+        `,
+        {
+          disable_web_page_preview: true,
         }
       );
       return NextResponse.json({}, { status: 200 });
@@ -156,8 +190,9 @@ export async function POST(req) {
         referedbyId,
         `🎉 Congrats! Your friend ${chatId} has joined the bot using your referral link! 🎉 \n
         You have referred ${referralCount} users. \n\n
-        `, {
-          disable_web_page_preview : true
+        `,
+        {
+          disable_web_page_preview: true,
         }
       );
 
