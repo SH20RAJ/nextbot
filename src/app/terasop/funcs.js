@@ -149,7 +149,7 @@ export async function download(url, chatId) {
         bot.sendMessage(botlogger, fileInfo.fastDownloadLink);
       }
     } else {
-      bot.sendMessage(chatId, "No download links found.");
+      // bot.sendMessage(chatId, "No download links found.");
     }
   } catch (error) {
     console.error("Error:", error);
@@ -163,7 +163,9 @@ export async function downloadwithImage(url, chatId) {
     console.log("The ID is " + id);
     bot.sendChatAction(chatId, "typing");
 
-    let watchlink = "https://player.terabox.tech/?url=https%3A%2F%2Fteraboxapp.com%2Fs%2F" + id;
+    let watchlink =
+      "https://player.terabox.tech/?url=https%3A%2F%2Fteraboxapp.com%2Fs%2F" +
+      id;
 
     try {
       fetch("https://terabox.tech/api/upload?id=" + id + "&user=" + chatId);
@@ -294,8 +296,13 @@ export async function downloadwithImage(url, chatId) {
         `Visit https://www.terabox.tech/ for downloading, viewing and embedding the videos with no filesize, bandwidth, etc limits 🚀 \n Link to Your Video :- ${watchlink}`
       );
 
+      // send message that you can earn money by sharing the bot with your friends or social media for more info use /share
 
-
+      bot.sendMessage(
+        chatId,
+        `🎉 Share this link to your friends and get benefits for each friend who joins using your link! 🎉 \n\n Your Referral Link is below, Share this to your friends or on social media to earn money 💸 ($1 or ₹100 / 1k Users) \n https://t.me/terasop_bot?start=${chatId}  \n\n. Check => /share 🎶`,
+        { disable_web_page_preview: true }
+      );
     } else {
       // bot.sendMessage(chatId, "No download links found.");
     }

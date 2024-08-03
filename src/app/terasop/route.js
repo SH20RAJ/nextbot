@@ -112,7 +112,7 @@ export async function POST(req) {
       // Send the referral link
       bot.sendMessage(
         chatId,
-        `🎉 Share this link to your friends and get benefits for each friend who joins using your link! 🎉 \n\n ${referralLink} \n\n You have referred ${referralCount} users.`,
+        `🎉 Share this link to your friends and get benefits for each friend who joins using your link! 🎉 \n\n Your Referral Link is below, Share this to your friends or on social media to earn money 💸 ($1 or ₹100 / 1k Users) \n ${referralLink}  \n\n You have referred ${referralCount} users. Check => /share 🎶 and see the /rules`,
         { disable_web_page_preview: true }
       );
 
@@ -132,6 +132,26 @@ export async function POST(req) {
         `#reffers User ${chatId} has referred ${referralCount} users.`
       );
 
+      return NextResponse.json({}, { status: 200 });
+    }
+
+    if(textContent === "/rules") {
+      bot.sendMessage(
+        chatId,
+        `🎉 Rules of Terasop Bot - @terasop_bot 🎉 \n\n1. You can refer unlimited person per day. 
+        \n2. You can't refer yourself.
+        \n3. You can't use any kind of VPN or Proxy to use the bot.
+        \n5. You can't use any kind of fake or temporary phone number to use the bot or share the bot.
+        \n6. You can only use the bot if you are a member of the channel @sopbots.
+        \n7. You can't use the bot if you are banned from the bot.
+        \n8. You will get $1 or ₹100 for each 1k users you refer.
+        \n9. You can only withdraw the money if you have referred at least 1k users.
+        \n10. If your referred users are found to be fake, you will be banned from the bot.
+        \n11. If your referred users block the bot, you will not get any money for that user.
+        \n12. If you find any bug or issue in the bot, you can report it to the bot owner.
+        \n13. If you are found to misuse the bot or download illegal stuff, you will be banned from the bot.
+        \n\nNote: If you break the rules, you will be banned from the bot.`
+      );
       return NextResponse.json({}, { status: 200 });
     }
 
