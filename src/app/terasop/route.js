@@ -182,9 +182,11 @@ export async function POST(req) {
         bot.sendMessage(chatId, "You can't refer yourself 🤦‍♂️");
         return NextResponse.json({}, { status: 200 });
       }
+
       const referer = await prisma.person.findUnique({
         where: { chatId: referralChatId },
       });
+
       if (referer) {
         referedbyId = referer.chatId;
       }
@@ -194,7 +196,7 @@ export async function POST(req) {
       });
       if (!person) {
         person = await prisma.person.create({
-          data: { chatId: String(chatId), referedbyId: Number(referedbyId) },
+          data: { chatId: String(chatId), referedbyId: Number(referralChatId) },
         });
       }
 
