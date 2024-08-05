@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import TelegramBot from "node-telegram-bot-api";
 import CryptoJS from "crypto-js";
+import { main } from "./ping";
 
 const token = process.env.TERASOP;
 
@@ -323,5 +324,8 @@ export async function downloadwithImage(url, chatId) {
       chatId,
       "An error occurred while processing your request if its a correct link try resending it 🚀. Otherwise you can report on @sopbots"
     );
+  } finally {
+    bot.sendChatAction(chatId, "typing");
+    main();
   }
 }
