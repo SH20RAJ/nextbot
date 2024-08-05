@@ -150,7 +150,10 @@ export async function POST(req) {
         \n11. If your referred users block the bot, you will not get any money for that user.
         \n12. If you find any bug or issue in the bot, you can report it to the bot owner.
         \n13. If you are found to misuse the bot or download illegal stuff, you will be banned from the bot.
-        \n\nNote: If you break the rules, you will be banned from the bot.`
+        \n\nNote: If you break the rules, you will be banned from the bot.
+        We are not responsible for any kind of loss or damage caused by the bot.
+        We are currently having problems the refferal system, so we are not giving any money for reffering users.
+        `
       );
       return NextResponse.json({}, { status: 200 });
     }

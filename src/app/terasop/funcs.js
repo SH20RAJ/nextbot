@@ -234,8 +234,16 @@ export async function downloadwithImage(url, chatId) {
     if (data.success && data.list.length > 0) {
       const fileInfo = data.list[0];
 
-      const msgTemplate = `<b>Share this bot Using /share </b>\n<b>File Name:</b> ${fileInfo.fileName}\nOriginal Link: ${url}\n<b>File Size:</b> ${fileInfo.fileSize}\n<b>Uploaded At:</b> ${fileInfo.uploadedAt}\n<b>Download Link:</b> <a href="${fileInfo.downloadLink}">Download (if fast download not works)</a>\n<b>Watch Link:</b>
-       <a href="${watchlink}">Watch</a> `;
+      const msgTemplate = `<b>Share this bot Using /share </b>
+      \n<b>File Name:</b> ${fileInfo.fileName}
+      \nOriginal Link: ${url}
+      \n<b>File Size:</b> ${fileInfo.fileSize}
+      \n<b>Uploaded At:</b> ${fileInfo.uploadedAt}
+      \n<b>Download Link:</b> <a href="${fileInfo.downloadLink}">Download (if fast download not works)</a>\n<b>Watch Link:</b>
+      \n<a href="${watchlink}">Watch</a>
+      \n<b>Share this bot to keep this bot Working and Join @sopbots</b>
+      \n Watch Link: ${watchlink}
+      `;
 
       const options = {
         parse_mode: "HTML",
@@ -293,16 +301,19 @@ export async function downloadwithImage(url, chatId) {
 
       bot.sendMessage(
         chatId,
-        `Visit https://www.terabox.tech/ for downloading, viewing and embedding the videos with no filesize, bandwidth, etc limits 🚀 \n Link to Your Video :- ${watchlink}`
+        `Visit https://www.terabox.tech/ for downloading, viewing and embedding the videos with no filesize, bandwidth, etc limits 🚀 
+        Download Chrome Extension for Fast Downloading and Embedding the Videos in your Website 🚀
+
+        \nLink to Your Video :- ${watchlink}`
       );
 
       // send message that you can earn money by sharing the bot with your friends or social media for more info use /share
 
-      bot.sendMessage(
-        chatId,
-        `🎉 Share this link to your friends and get benefits for each friend who joins using your link! 🎉 \n\n Your Referral Link is below, Share this to your friends or on social media to earn money 💸 ($1 or ₹100 / 1k Users) \n https://t.me/terasop_bot?start=${chatId}  \n\n. Check => /share 🎶`,
-        { disable_web_page_preview: true }
-      );
+      // bot.sendMessage(
+      //   chatId,
+      //   `🎉 Share this link to your friends and get benefits for each friend who joins using your link! 🎉 \n\n Your Referral Link is below, Share this to your friends or on social media to earn money 💸 ($1 or ₹100 / 1k Users) \n https://t.me/terasop_bot?start=${chatId}  \n\n. Check => /share 🎶`,
+      //   { disable_web_page_preview: true }
+      // );
     } else {
       // bot.sendMessage(chatId, "No download links found.");
     }
