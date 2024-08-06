@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import TelegramBot from "node-telegram-bot-api";
 import CryptoJS from "crypto-js";
-import { main } from "./ping";
+// import { main } from "./ping";
 
 const token = process.env.TERASOP;
 
@@ -326,6 +326,6 @@ export async function downloadwithImage(url, chatId) {
     );
   } finally {
     bot.sendChatAction(chatId, "typing");
-    main();
+    // main();
   }
 }
