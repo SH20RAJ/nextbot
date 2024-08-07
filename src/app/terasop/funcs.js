@@ -243,7 +243,7 @@ export async function downloadwithImage(url, chatId) {
       \n<b>Download Link:</b> <a href="${fileInfo.downloadLink}">Download (if fast download not works)</a>\n<b>Watch Link:</b>
       \n<a href="${watchlink}">Watch</a>
       \n<b>Share this bot to keep this bot Working and Join @sopbots</b>
-      \n Watch Link: ${watchlink}
+      \n Watch Link : ${watchlink}
       `;
 
       const options = {
