@@ -251,7 +251,7 @@ export async function downloadwithImage(url, chatId) {
         reply_markup: {
           inline_keyboard: [
             [
-              { text: "Fast Download", url: "https://player.terabox.tech/ads?url="+encodeURIComponent(fileInfo.fastDownloadLink) },
+              { text: "Fast Download", url: "https://player.terabox.tech/ads?url="+(fileInfo.fastDownloadLink) },
               {
                 text: "Watch",
                 url: watchlink,
