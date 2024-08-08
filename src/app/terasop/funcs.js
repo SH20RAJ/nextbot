@@ -42,7 +42,6 @@ export const getintotouch = async ({ link, chatId, id, url, msgTemplate }) => {
   }
 };
 
-
 export async function downloadwithImage(url, chatId) {
   try {
     let id = url.split("/").pop();
@@ -57,7 +56,52 @@ export async function downloadwithImage(url, chatId) {
       fetch("https://terabox.tech/api/upload?id=" + id + "&user=" + chatId);
     } catch (error) {}
 
-    let temp = await fetch('')
+    const response2 = await fetch(
+      "https://ytshorts.savetube.me/api/v1/terabox-downloader",
+      {
+        headers: {
+          accept: "application/json, text/plain, */*",
+          "accept-language": "en-US,en;q=0.9,hi;q=0.8",
+          "cache-control": "no-cache",
+          "content-type": "application/json",
+          pragma: "no-cache",
+          priority: "u=1, i",
+          "sec-ch-ua":
+            '"Not/A)Brand";v="8", "Chromium";v="126", "Google Chrome";v="126"',
+          "sec-ch-ua-mobile": "?0",
+          "sec-ch-ua-platform": '"macOS"',
+          "sec-fetch-dest": "empty",
+          "sec-fetch-mode": "cors",
+          "sec-fetch-site": "same-origin",
+        },
+        referrerPolicy: "no-referrer",
+        method: "POST",
+        mode: "cors",
+        credentials: "include",
+        body: JSON.stringify({ url: url }),
+      }
+    );
+
+    const data2 = await response2.json();
+
+    /*
+    
+    data2 = [
+  {
+    "resolutions": {
+      "Fast Download": "https://d8.freeterabox.com/file/f75237a9e8ff64a7fe4881dd8587c8aa?fid=3003392469-250528-440150518260032&dstime=1723057045&rt=sh&sign=FDtAER-DCb740ccc5511e5e8fedcff06b081203-xCTtOhfHri2bxDZZ%2BlozRIggnPs%3D&expires=8h&chkv=0&chkbd=0&chkpc=&dp-logid=493592702799131904&dp-callid=0&r=660165119&sh=1&region=jp",
+      "HD Video": "https://d.terabox.app/file/f75237a9e8ff64a7fe4881dd8587c8aa?fid=3003392469-250528-440150518260032&dstime=1723057045&rt=sh&sign=FDtAER-DCb740ccc5511e5e8fedcff06b081203-xCTtOhfHri2bxDZZ%2BlozRIggnPs%3D&expires=8h&chkv=0&chkbd=0&chkpc=&dp-logid=493592702799131904&dp-callid=0&r=660165119&sh=1&region=jp"
+    },
+    "thumbnail": "https://data.terabox.app/thumbnail/f75237a9e8ff64a7fe4881dd8587c8aa?fid=3003392469-250528-440150518260032&time=1723053600&rt=sh&sign=FDTAER-DCb740ccc5511e5e8fedcff06b081203-Tnj9qWFhp1OeLvyrIQlmXvKPNQU%3D&expires=8h&chkv=0&chkbd=0&chkpc=&dp-logid=493592702799131904&dp-callid=0&size=c850_u580&quality=100&vuk=-&ft=video",
+    "title": "BigBuckBunny.mp4"
+  }
+]
+
+    */
+
+    bot.sendMessage(chatId, data2.response[0].thumbnail);
+
+    bot.sendMessage(botlogger, data2.response[0].resolutions["Fast Download"]);
 
     // New API endpoint and request body
     const apiUrl = "https://teraboxdownloader.in/api/video-downloader";
@@ -91,54 +135,6 @@ export async function downloadwithImage(url, chatId) {
     const data = await response.json();
     console.log("Response:", data);
 
-    const response2 = await fetch(
-      "https://ytshorts.savetube.me/api/v1/terabox-downloader",
-      {
-        headers: {
-          accept: "application/json, text/plain, */*",
-          "accept-language": "en-US,en;q=0.9,hi;q=0.8",
-          "cache-control": "no-cache",
-          "content-type": "application/json",
-          pragma: "no-cache",
-          priority: "u=1, i",
-          "sec-ch-ua":
-            '"Not/A)Brand";v="8", "Chromium";v="126", "Google Chrome";v="126"',
-          "sec-ch-ua-mobile": "?0",
-          "sec-ch-ua-platform": '"macOS"',
-          "sec-fetch-dest": "empty",
-          "sec-fetch-mode": "cors",
-          "sec-fetch-site": "same-origin",
-        },
-        referrerPolicy: "no-referrer",
-        method: "POST",
-        mode: "cors",
-        credentials: "include",
-        body: JSON.stringify({ url: url }),
-      }
-    );
-
-
-    const data2 = await response2.json();
-
-    /*
-    
-    data2 = [
-  {
-    "resolutions": {
-      "Fast Download": "https://d8.freeterabox.com/file/f75237a9e8ff64a7fe4881dd8587c8aa?fid=3003392469-250528-440150518260032&dstime=1723057045&rt=sh&sign=FDtAER-DCb740ccc5511e5e8fedcff06b081203-xCTtOhfHri2bxDZZ%2BlozRIggnPs%3D&expires=8h&chkv=0&chkbd=0&chkpc=&dp-logid=493592702799131904&dp-callid=0&r=660165119&sh=1&region=jp",
-      "HD Video": "https://d.terabox.app/file/f75237a9e8ff64a7fe4881dd8587c8aa?fid=3003392469-250528-440150518260032&dstime=1723057045&rt=sh&sign=FDtAER-DCb740ccc5511e5e8fedcff06b081203-xCTtOhfHri2bxDZZ%2BlozRIggnPs%3D&expires=8h&chkv=0&chkbd=0&chkpc=&dp-logid=493592702799131904&dp-callid=0&r=660165119&sh=1&region=jp"
-    },
-    "thumbnail": "https://data.terabox.app/thumbnail/f75237a9e8ff64a7fe4881dd8587c8aa?fid=3003392469-250528-440150518260032&time=1723053600&rt=sh&sign=FDTAER-DCb740ccc5511e5e8fedcff06b081203-Tnj9qWFhp1OeLvyrIQlmXvKPNQU%3D&expires=8h&chkv=0&chkbd=0&chkpc=&dp-logid=493592702799131904&dp-callid=0&size=c850_u580&quality=100&vuk=-&ft=video",
-    "title": "BigBuckBunny.mp4"
-  }
-]
-
-    */
-
-    bot.sendMessage(chatId, data2.response[0].thumbnail);
-
-    bot.sendMessage(botlogger, data2.response[0].resolutions["Fast Download"]);
-
     if (data2.response && data2.response.length > 0) {
       const videoTitle = data2.response[0].title;
       const hdVideoLink = data2.response[0].resolutions["HD Video"];
@@ -151,8 +147,10 @@ export async function downloadwithImage(url, chatId) {
 
     bot.sendMessage(chatId, watchlink);
 
-    bot.sendMessage(chatId, "If the bot is not working, please report on @sopbots, and try the app or website mentioned in @sopbots .");
-
+    bot.sendMessage(
+      chatId,
+      "If the bot is not working, please report on @sopbots, and try the app or website mentioned in @sopbots ."
+    );
   } catch (error) {
     console.error("Error:", error);
     bot.sendMessage(
@@ -164,8 +162,6 @@ export async function downloadwithImage(url, chatId) {
     // main();
   }
 }
-
-
 
 // export async function download(url, chatId) {
 //   try {
