@@ -4,6 +4,7 @@ import { generateDownloadUrl } from "@/app/reelsave/route";
 
 
 export const GET = async (req, res, next) => {
+  
   console.log(req);
   // const nextUrl = new URL(req.url);
   let url = req.nextUrl.searchParams.get("url");
@@ -44,5 +45,19 @@ export const GET = async (req, res, next) => {
 
   console.log(downloadUrl);
 
-  return Response.json({ data });
+  // add cors headers
+
+
+
+  return Response.json({ data },
+    {
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+        "Access-Control-Allow-Headers": "Content-Type",
+        "Access-Control-Max-Age": "86400",
+        "Content-Type": "application/json",
+      },
+    }
+  );
 };
