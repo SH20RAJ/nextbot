@@ -58,5 +58,5 @@ model Person {
   chatId      String    @unique
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
-  referedbyId Int?      // For the referral system
+  referedbyId String?      // For the referral system
 }
