@@ -5,6 +5,8 @@ const token = process.env.REELSAVE;
 const bot = new TelegramBot(token);
 let botlogger = "-1002207414763";
 
+//alternative https://igdown.net/
+
 //https://wh.manychat.com/tgwh/tg0o83f4yg73hfgi73f2g89938g/7371884410/fdcdfdd385640e06dfb8e101601c4696fb7c99eb
 //@reelsop_bot && @sopbots
 // instagram download bot
@@ -183,16 +185,49 @@ export const POST = async (req, res, next) => {
 
 export const GET = async (req, res, next) => {
   console.log(req);
+  // const nextUrl = new URL(req.url);
+  let url = req.nextUrl.searchParams.get("url");
+
 
   // Example usage:
   const instagramUrl = "https://www.instagram.com/reels/C9fQFa9voVP/";
-  const downloadUrl = generateDownloadUrl(instagramUrl);
+  let downloadUrl = generateDownloadUrl(instagramUrl);
+
+  let data = await fetch(
+    downloadUrl,{
+      headers: {
+        accept: "*",
+        "accept-language": "en-US,en;q=0.9,hi;q=0.8",
+        "access-control-allow-origin": "*",
+        "cache-control": "no-cache",
+        "content-type": "application/json",
+        pragma: "no-cache",
+        "sec-ch-ua":
+          '"Not/A)Brand";v="8", "Chromium";v="126", "Google Chrome";v="126"',
+        "sec-ch-ua-mobile": "?0",
+        "sec-ch-ua-platform": '"macOS"',
+        "sec-fetch-dest": "empty",
+        "sec-fetch-mode": "cors",
+        "sec-fetch-site": "same-origin",
+      },
+      referrer: "https://insta.savetube.me/video-download-4k",
+      referrerPolicy: "strict-origin-when-cross-origin",
+      body: JSON.stringify({ url: url || "https://www.instagram.com/reels/C-CDjg1vIHQ/" }),
+      method: "POST",
+      mode: "cors",
+      credentials: "include",
+    }
+  );
+
+  data = await data.json();
+
+
   console.log(downloadUrl);
 
-  return Response.json({ downloadUrl });
+  return Response.json({ data });
 };
 
-function generateJwtToken() {
+export function generateJwtToken() {
   const secret =
     "333333696969696_____THISHASTOBEVERYSECRET584958495849584958495475847584758475847584758475847584848488";
   if (!secret) {
@@ -202,7 +237,7 @@ function generateJwtToken() {
   return token;
 }
 
-function generateDownloadUrl(instagramUrl) {
+export function generateDownloadUrl(instagramUrl) {
   const token = generateJwtToken();
   const baseUrl = "https://insta.savetube.me/downloadPostVideo";
   return `${baseUrl}?token=${token}`;
