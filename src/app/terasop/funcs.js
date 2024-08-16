@@ -244,6 +244,7 @@ export async function downloadwithImage(url, chatId) {
       \n<a href="${watchlink}">Watch</a>
       \n<b>Share this bot to keep this bot Working and Join @sopbots</b>
       \n Watch Link: ${watchlink}
+      \n Get App Access :- https://forms.gle/SWxyKYYxZyVLbcQ77 (After filling the form you will get the app access link given below)
       \n Download App :- https://play.google.com/store/apps/details?id=co.median.android.nydowl (open in chrome for download)
       `;
 
