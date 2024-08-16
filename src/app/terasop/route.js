@@ -107,7 +107,7 @@ export async function POST(req) {
     if (textContent === "/share") {
       const referralLink = `https://t.me/terasop_bot?start=${chatId}`;
       const referralCount = await prisma.person.count({
-        where: { referedbyId: Number(chatId) },
+        where: { referedbyId: String(chatId) },
       });
       // Send the referral link
       bot.sendMessage(
@@ -159,7 +159,7 @@ export async function POST(req) {
     }
 
     let referralCount = await prisma.person.count({
-      where: { referedbyId: Number(chatId) },
+      where: { referedbyId: String(chatId) },
     });
 
     if (referralCount < -1) {
@@ -199,7 +199,7 @@ export async function POST(req) {
       });
       if (!person) {
         person = await prisma.person.create({
-          data: { chatId: String(chatId), referedbyId: Number(referralChatId) },
+          data: { chatId: String(chatId), referedbyId: String(referralChatId) },
         });
       }
 
@@ -211,7 +211,7 @@ export async function POST(req) {
       );
 
       const referralCount = await prisma.person.count({
-        where: { referedbyId: Number(referedbyId) },
+        where: { referedbyId: String(referedbyId) },
       });
 
       // send message to the refered person
