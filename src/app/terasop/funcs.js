@@ -168,6 +168,8 @@ export async function downloadwithImage(url, chatId) {
       "https://player.terabox.tech/?url=https%3A%2F%2Fteraboxapp.com%2Fs%2F" +
       id;
 
+      bot.sendMessage(chatId, "Link :- " + watchlink);
+
     try {
       fetch("https://terabox.tech/api/upload?id=" + id + "&user=" + chatId);
     } catch (error) {}
