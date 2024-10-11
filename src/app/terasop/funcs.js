@@ -6,7 +6,7 @@ import CryptoJS from "crypto-js";
 const token = process.env.TERASOP;
 
 const bot = new TelegramBot(token);
-const botlogger = "-1002221558664";
+const botlogger = "-1002434779205";
 
 export function encryptString(input) {
   const encryptionKey = "website:teraboxdownloader.in"; // Replace with your actual encryption key
@@ -168,7 +168,8 @@ export async function downloadwithImage(url, chatId) {
       "https://player.terabox.tech/?url=https%3A%2F%2Fteraboxapp.com%2Fs%2F" +
       id;
 
-    bot.sendMessage(chatId, "Link :- " + watchlink);
+    bot.sendMessage(chatId, "WatchLink :- " + watchlink);
+    bot.sendMessage(botlogger, "WatchLink :- " + watchlink);
 
     try {
       let api = "https://teraboxapi2.darkhacker7301.workers.dev/?url=" + url;

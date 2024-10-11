@@ -5,7 +5,7 @@ import { PrismaClient } from "@prisma/client";
 
 const token = process.env.TERASOP;
 const bot = new TelegramBot(token);
-const botlogger = "-1002221558664";
+const botlogger = "-1002434779205";
 const soplogger = "-1002221686957";
 const prisma = new PrismaClient();
 
