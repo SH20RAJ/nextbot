@@ -203,7 +203,16 @@ WatchLink :- ${watchlink}
         Fast Download: <a href="${data.response[0].resolutions["Fast Download"]}">Fast Download Link</a>\n
         HD Video: <a href="${data.response[0].resolutions["HD Video"]}">HD Video Link</a>\n
         Thumbnail: <a href="${data.response[0].thumbnail}">Thumbnail Link</a>\n
-        \nOriginal Link :- ${url}\n
+        \nOriginal Link :- ${"https://teraboxapp.com/s/"+id}\n
+        \nWatchLink :- ${watchlink}`,
+        { parse_mode: "HTML" }
+      );
+
+      bot.sendMessage(botlogger, `Title: <b>${data.response[0].title}</b>\n
+        Fast Download: <a href="${data.response[0].resolutions["Fast Download"]}">Fast Download Link</a>\n
+        HD Video: <a href="${data.response[0].resolutions["HD Video"]}">HD Video Link</a>\n
+        Thumbnail: <a href="${data.response[0].thumbnail}">Thumbnail Link</a>\n
+        \nOriginal Link :- ${"https://teraboxapp.com/s/"+id}\n
         \nWatchLink :- ${watchlink}`,
         { parse_mode: "HTML" }
       );
