@@ -174,14 +174,12 @@ export async function downloadwithImage(url, chatId) {
     // );
 
     let msg = `
-      Original Link :- ${" https://teraboxapp.com/s/"+id}
+  <b>Original Link:</b> <a href="https://teraboxapp.com/s/${id}">https://teraboxapp.com/s/${id}</a>
+  <b>Watch Link:</b> <a href="${watchlink}">${watchlink}</a>
+  <b>Try our Website:</b> <a href="https://www.terabox.tech/">https://www.terabox.tech/</a>
+  `;
 
-
-WatchLink :- ${watchlink}
-
-      `;
-
-    bot.sendMessage(chatId, msg);
+    bot.sendMessage(chatId, msg , { parse_mode: "HTML" });
     // bot.sendMessage(botlogger, "WatchLink :- " + watchlink);
 
     try {
