@@ -175,6 +175,7 @@ export async function downloadwithImage(url, chatId) {
 
     let msg = `
   <b>Original Link:</b> <a href="https://teraboxapp.com/s/${id}">https://teraboxapp.com/s/${id}</a>
+  <a href="https://www.1024terabox.com/sharing/embed?surl=${id.slice(1)}&autoplay=true&mute=false">Stream Embeded Video</a>
   <b>Watch Link:</b> <a href="${watchlink}">${watchlink}</a>
   <b>Try our Website:</b> <a href="https://www.terabox.tech/">https://www.terabox.tech/</a>
   `;
@@ -201,6 +202,7 @@ export async function downloadwithImage(url, chatId) {
         Fast Download: <a href="${data.response[0].resolutions["Fast Download"]}">Fast Download Link</a>\n
         HD Video: <a href="${data.response[0].resolutions["HD Video"]}">HD Video Link</a>\n
         Thumbnail: <a href="${data.response[0].thumbnail}">Thumbnail Link</a>\n
+        Stream Video: <a href="https://www.1024terabox.com/sharing/embed?surl=${id.slice(1)}&autoplay=true&mute=false">Stream Video</a>\n
         \nOriginal Link :- ${"https://teraboxapp.com/s/"+id}\n
         \nWatchLink :- ${watchlink}`,
         { parse_mode: "HTML" }
