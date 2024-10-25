@@ -183,6 +183,8 @@ export async function downloadwithImage(url, chatId) {
     bot.sendMessage(chatId, msg , { parse_mode: "HTML" });
     // bot.sendMessage(botlogger, "WatchLink :- " + watchlink);
 
+    bot.sendPhoto("https://i.imgur.com/AZhdmtF.png");
+
     try {
       let api = "https://teraboxapi2.darkhacker7301.workers.dev/?url=" + url;
       console.clear();
