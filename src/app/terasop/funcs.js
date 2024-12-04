@@ -177,15 +177,15 @@ export async function downloadwithImage(url, chatId) {
   <b>Original Link:</b> <a href="https://teraboxapp.com/s/${id}">https://teraboxapp.com/s/${id}</a>
   <a href="https://www.1024terabox.com/sharing/embed?surl=${id.slice(1)}&autoplay=true&mute=false">Stream Embeded Video</a>
   <b>Watch Link:</b> <a href="${watchlink}">${watchlink}</a>
-  <b>Try our Website 🎃 :</b> <a href="https://www.terabox.tech/">https://www.terabox.tech/</a>
-  <b>Sponsor 🦾 :</b> <a href="https://sopkit.github.io/">https://sopkit.github.io/</a>
+  <b>Try our Website 🎃 :</b> <a href="https://iplogger.com/terasop">https://www.terabox.tech/</a>
+  <b>Sponsor 🦾 :</b> <a href="https://maper.info/sopkit">https://sopkit.github.io/</a>
   `;
 
     bot.sendMessage(chatId, msg , { parse_mode: "HTML" });
     bot.sendMessage(botlogger, msg , { parse_mode: "HTML" });
     // bot.sendMessage(botlogger, "WatchLink :- " + watchlink);
 
-    bot.sendPhoto("https://i.imgur.com/AZhdmtF.png");
+    bot.sendPhoto(chatId,"https://i.imgur.com/AZhdmtF.png");
 
     try {
       let api = "https://teraboxapi2.darkhacker7301.workers.dev/?url=" + url;
