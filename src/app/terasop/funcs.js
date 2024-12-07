@@ -179,11 +179,15 @@ export async function downloadwithImage(url, chatId) {
   <b>Watch Link:</b> <a href="${watchlink}">${watchlink}</a>
   <b>Try our Website 🎃 :</b> <a href="https://iplogger.com/terasop">https://www.terabox.tech/</a>
   <b>Sponsor 🦾 :</b> <a href="https://maper.info/sopkit">https://sopkit.github.io/</a>
+  <b>Sponsor 🦾 :</b> <a href="https://www.youtube.com/watch?v=c5XWVPeeg5o&t=8s">Convert Text to video</a>
+
   `;
 
     bot.sendMessage(chatId, msg , { parse_mode: "HTML" });
     bot.sendMessage(botlogger, msg , { parse_mode: "HTML" });
     // bot.sendMessage(botlogger, "WatchLink :- " + watchlink);
+
+    bot.sendMessage(chatId,"https://www.youtube.com/watch?v=c5XWVPeeg5o&t=8s");
 
     bot.sendPhoto(chatId,"https://i.imgur.com/AZhdmtF.png");
 
