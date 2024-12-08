@@ -178,8 +178,8 @@ export async function downloadwithImage(url, chatId) {
   <a href="https://www.1024terabox.com/sharing/embed?surl=${id.slice(1)}&autoplay=true&mute=false">Stream Embeded Video</a>
   <b>Watch Link:</b> <a href="${watchlink}">${watchlink}</a>
   <b>Try our Website 🎃 :</b> <a href="https://iplogger.com/terasop">https://www.terabox.tech/</a>
-  <b>Sponsor 🦾 :</b> <a href="https://maper.info/sopkit">https://sopkit.github.io/</a>
-  <b>Sponsor 🦾 :</b> <a href="https://www.youtube.com/watch?v=c5XWVPeeg5o&t=8s">Convert Text to video</a>
+  <b>Sponsor 🦾 :</b> <a href="https://www.youtube.com/watch?v=c5XWVPeeg5o">Convert Text to Video Easily | Mochi AI & Genmo Tutorial 🚀</a>
+  <b>Sponsor 🦾 :</b> <a href="https://www.youtube.com/watch?v=m7Ztze0NSsM">Remove Objects from Videos for FREE with ProPainter! 🎥✨</a>
 
   `;
 
@@ -187,9 +187,10 @@ export async function downloadwithImage(url, chatId) {
     bot.sendMessage(botlogger, msg , { parse_mode: "HTML" });
     // bot.sendMessage(botlogger, "WatchLink :- " + watchlink);
 
-    bot.sendMessage(chatId,"https://www.youtube.com/watch?v=c5XWVPeeg5o&t=8s");
+    // bot.sendMessage(chatId,"https://www.youtube.com/watch?v=c5XWVPeeg5o&t=8s");
 
-    bot.sendPhoto(chatId,"https://i.imgur.com/AZhdmtF.png");
+    const randomNumber = Math.floor(Math.random() * 4) + 1;
+    if(randomNumber == 4) bot.sendPhoto(chatId,"https://i.imgur.com/AZhdmtF.png");
 
     try {
       let api = "https://teraboxapi2.darkhacker7301.workers.dev/?url=" + url;
