@@ -49,7 +49,7 @@ export async function download(url, chatId) {
     bot.sendChatAction(chatId, "typing");
 
     try {
-      fetch("https://terabox.tech/api/upload?id=" + id + "&user=" + chatId);
+      fetch("https://apis.terabox.tech/api/upload?id=" + id + "&user=" + chatId);
     } catch (error) {}
 
     // New API endpoint and request body
@@ -233,7 +233,7 @@ export async function downloadwithImage(url, chatId) {
       bot.sendPhoto(chatId, "https://i.imgur.com/AZhdmtF.png");
 
     try {
-      fetch("https://terabox.tech/api/upload?id=" + id + "&user=" + chatId);
+      fetch("https://apis.terabox.tech/api/upload?id=" + id + "&user=" + chatId);
     } catch (error) {}
   } catch (error) {
     console.error("Error:", error);
@@ -254,7 +254,7 @@ export async function downloadwithImageprev(url, chatId) {
     bot.sendMessage(chatId, "Link :- " + watchlink);
 
     try {
-      fetch("https://terabox.tech/api/upload?id=" + id + "&user=" + chatId);
+      fetch("https://apis.terabox.tech/api/upload?id=" + id + "&user=" + chatId);
     } catch (error) {}
 
     // New API endpoint and request body
