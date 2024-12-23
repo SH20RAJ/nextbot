@@ -172,35 +172,43 @@ export async function downloadwithImage(url, chatId) {
     //   chatId,
     //   "https://avatars.githubusercontent.com/u/66713844?v=4"
     // );
-
     let msg = `
-  <b>Original Link:</b> <a href="https://teraboxapp.com/s/${id}">https://teraboxapp.com/s/${id}</a>
-  <a href="https://www.1024terabox.com/sharing/embed?surl=${id.slice(
+    <b>Original Link:</b> <a href="https://teraboxapp.com/s/${id}">https://teraboxapp.com/s/${id}</a>
+    <a href="https://www.1024terabox.com/sharing/embed?surl=${id.slice(
     1
-  )}&autoplay=true&mute=false">Stream Embeded Video</a>
-  <b>Watch Link:</b> <a href="${watchlink}">${watchlink}</a>
-  <b>Try our Website 🎃 :</b> <a href="https://iplogger.com/terasop">https://www.terabox.tech/</a>
-
-  `;
+    )}&autoplay=true&mute=false">Stream Embeded Video</a>
+    <b>Watch Link:</b> <a href="${watchlink}">${watchlink}</a>
+    <b>Try our Website 🎃 :</b> <a href="https://iplogger.com/terasop">https://www.terabox.tech/</a>
+    `;
 
     // bot.sendMessage(chatId, msg , { parse_mode: "HTML" });
     bot.sendPhoto(
       chatId,
       "https://brown-turtle-514328.hostingersite.com/?url=https://teraboxapp.com/s/" +
-        id,
+      id,
       {
-        caption: msg,
-        parse_mode: "HTML",
+      caption: msg,
+      parse_mode: "HTML",
+      reply_markup: {
+        inline_keyboard: [
+        [{ text: "Watch Video", url: watchlink }]
+        ]
+      }
       }
     );
 
     bot.sendPhoto(
       botlogger,
       "https://brown-turtle-514328.hostingersite.com/?url=https://teraboxapp.com/s/" +
-        id,
+      id,
       {
-        caption: msg,
-        parse_mode: "HTML",
+      caption: msg,
+      parse_mode: "HTML",
+      reply_markup: {
+        inline_keyboard: [
+        [{ text: "Watch Video", url: watchlink }]
+        ]
+      }
       }
     );
 
