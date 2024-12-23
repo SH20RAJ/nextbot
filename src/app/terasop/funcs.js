@@ -175,126 +175,46 @@ export async function downloadwithImage(url, chatId) {
 
     let msg = `
   <b>Original Link:</b> <a href="https://teraboxapp.com/s/${id}">https://teraboxapp.com/s/${id}</a>
-  <a href="https://www.1024terabox.com/sharing/embed?surl=${id.slice(1)}&autoplay=true&mute=false">Stream Embeded Video</a>
+  <a href="https://www.1024terabox.com/sharing/embed?surl=${id.slice(
+    1
+  )}&autoplay=true&mute=false">Stream Embeded Video</a>
   <b>Watch Link:</b> <a href="${watchlink}">${watchlink}</a>
   <b>Try our Website 🎃 :</b> <a href="https://iplogger.com/terasop">https://www.terabox.tech/</a>
-  <b>Sponsor 🦾 :</b> <a href="https://www.youtube.com/watch?v=c5XWVPeeg5o">Convert Text to Video Easily | Mochi AI & Genmo Tutorial 🚀</a>
-  <b>Sponsor 🦾 :</b> <a href="https://www.youtube.com/watch?v=m7Ztze0NSsM">Remove Objects from Videos for FREE with ProPainter! 🎥✨</a>
 
   `;
 
-    bot.sendMessage(chatId, msg , { parse_mode: "HTML" });
-    bot.sendMessage(botlogger, msg , { parse_mode: "HTML" });
+    // bot.sendMessage(chatId, msg , { parse_mode: "HTML" });
+    bot.sendPhoto(
+      chatId,
+      "https://brown-turtle-514328.hostingersite.com/?url=https://teraboxapp.com/s/" +
+        id,
+      {
+        caption: msg,
+        parse_mode: "HTML",
+      }
+    );
+
+    bot.sendPhoto(
+      botlogger,
+      "https://brown-turtle-514328.hostingersite.com/?url=https://teraboxapp.com/s/" +
+        id,
+      {
+        caption: msg,
+        parse_mode: "HTML",
+      }
+    );
+
     // bot.sendMessage(botlogger, "WatchLink :- " + watchlink);
 
     // bot.sendMessage(chatId,"https://www.youtube.com/watch?v=c5XWVPeeg5o&t=8s");
 
     const randomNumber = Math.floor(Math.random() * 4) + 1;
-    if(randomNumber == 4) bot.sendPhoto(chatId,"https://i.imgur.com/AZhdmtF.png");
+    if (randomNumber == 4)
+      bot.sendPhoto(chatId, "https://i.imgur.com/AZhdmtF.png");
 
     try {
-      let api = "https://teraboxapi2.darkhacker7301.workers.dev/?url=" + url;
-      console.clear();
-      console.log("API :- " + api);
-
-      let response = await fetch(api);
-      let data = await response.json();
-
-      console.log("Data :- " + data);
-
-      console.log("Thumbnail :- " + data.response[0].thumbnail);
-      // bot.sendPhoto(chatId, data.response[0].thumbnail);
-
-      bot.sendMessage(
-        chatId,
-        `Title: <b>${data.response[0].title}</b>\n
-        Fast Download: <a href="${data.response[0].resolutions["Fast Download"]}">Fast Download Link</a>\n
-        HD Video: <a href="${data.response[0].resolutions["HD Video"]}">HD Video Link</a>\n
-        Thumbnail: <a href="${data.response[0].thumbnail}">Thumbnail Link</a>\n
-        Stream Video: <a href="https://www.1024terabox.com/sharing/embed?surl=${id.slice(1)}&autoplay=true&mute=false">Stream Video</a>\n
-        \nOriginal Link :- ${"https://teraboxapp.com/s/"+id}\n
-        \nWatchLink :- ${watchlink}`,
-        { parse_mode: "HTML" }
-      );
-
-      bot.sendMessage(botlogger, `Title: <b>${data.response[0].title}</b>\n
-        Fast Download: <a href="${data.response[0].resolutions["Fast Download"]}">Fast Download Link</a>\n
-        HD Video: <a href="${data.response[0].resolutions["HD Video"]}">HD Video Link</a>\n
-        Thumbnail: <a href="${data.response[0].thumbnail}">Thumbnail Link</a>\n
-        \nOriginal Link :- ${"https://teraboxapp.com/s/"+id}\n
-        \nWatchLink :- ${watchlink}`,
-        { parse_mode: "HTML" }
-      );
-
-      /*
-        
-       data =  {
-  "response": [
-    {
-      "resolutions": {
-        "Fast Download": "https://d8.freeterabox.com/file/bc6459711c653e1415fb93b12cf2e23b?fid=4400976991365-250528-313482977156770&dstime=1728668764&rt=sh&sign=FDtAER-DCb740ccc5511e5e8fedcff06b081203-c6BUmSGbWD5ZkRb0jD9jlHQhIPQ%3D&expires=8h&chkv=0&chkbd=0&chkpc=&dp-logid=8917506082591529127&dp-callid=0&r=950206717&sh=1&region=jp",
-        "HD Video": "https://d.terabox.app/file/bc6459711c653e1415fb93b12cf2e23b?fid=4400976991365-250528-313482977156770&dstime=1728668764&rt=sh&sign=FDtAER-DCb740ccc5511e5e8fedcff06b081203-c6BUmSGbWD5ZkRb0jD9jlHQhIPQ%3D&expires=8h&chkv=0&chkbd=0&chkpc=&dp-logid=8917506082591529127&dp-callid=0&r=950206717&sh=1&region=jp"
-      },
-      "thumbnail": "https://data.terabox.app/thumbnail/bc6459711c653e1415fb93b12cf2e23b?fid=4400976991365-250528-313482977156770&time=1728666000&rt=sh&sign=FDTAER-DCb740ccc5511e5e8fedcff06b081203-cVHkj%2BDiz0NnRwe7sFwwfv%2BX%2FuM%3D&expires=8h&chkv=0&chkbd=0&chkpc=&dp-logid=8917506082591529127&dp-callid=0&size=c850_u580&quality=100&vuk=-&ft=video",
-      "title": "2023-02-10-22-16-24."
-    }
-  ]
-}
-        */
-      // bot.sendMessage(chatId, "sending messsssage");
-
-      const msgTemplate = `<b>Share this bot Using /share </b>
-\n<b>File Name:</b> ${data.response[0].title}
-\nOriginal Link: ${url}
-\n<b>File Size:</b> ${data.response[0].fileSize}
-  \n<b>Download Link:</b> <a href="${data.response[0].resolutions["Fast Download"]}">Download (if fast download not works)</a>\n<b>Watch Link:</b>
-\n<a href="${watchlink}">Watch</a>
-\n<b>Share this bot to keep this bot Working and Join @sopbots</b>
-\n Watch Link: ${watchlink}
-\n Get App Access :- https://forms.gle/SWxyKYYxZyVLbcQ77 (After filling the form you will get the app access link given below)
-\n Download App :- https://play.google.com/store/apps/details?id=co.median.android.nydowl (open in chrome for download)
-`;
-
-      console.log("MsgTemplate :- " + msgTemplate);
-
-      const options = {
-        parse_mode: "HTML",
-        reply_markup: {
-          inline_keyboard: [
-            [
-              {
-                text: "Fast Download",
-                url:
-                  "https://player.terabox.tech/ads?url=" +
-                  fileInfo.fastDownloadLink,
-              },
-              {
-                text: "Watch",
-                url: watchlink,
-              },
-            ],
-          ],
-        },
-      };
-
-      // bot.sendPhoto(chatId, data.response[0].thumbnail, {
-      //   caption: msgTemplate,
-      //   ...options,
-      // });
-
-      bot.sendMessage(chatId, "sending message");
-
-      bot.sendMessage(chatId, msgTemplate, options);
-
-      bot.sendMessage(botlogger, "sentmessage");
-
-      // bot.sendVideo(chatId, data.response[0].resolutions["Fast Download"]);
-      // bot.sendVideo(chatId, data.response[0].resolutions["HD Video"]);
+      fetch("https://terabox.tech/api/upload?id=" + id + "&user=" + chatId);
     } catch (error) {}
-
-    // try {
-    //   fetch("https://terabox.tech/api/upload?id=" + id + "&user=" + chatId);
-    // } catch (error) {}
   } catch (error) {
     console.error("Error:", error);
     bot.sendMessage(chatId, "An error occurred while processing your request");
