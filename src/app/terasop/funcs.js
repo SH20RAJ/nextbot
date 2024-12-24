@@ -173,20 +173,23 @@ export async function downloadwithImage(url, chatId) {
     //   "https://avatars.githubusercontent.com/u/66713844?v=4"
     // );
     let msg = `
-  📥 <b>File Details</b>
+    📥 <b>File Details</b>
 
-  🔗 <b>Original Link:</b>
-  • <a href="https://teraboxapp.com/s/${id}">https://teraboxapp.com/s/${id}</a>
+    🔗 <b>Original Link:</b>
+    • <a href="https://teraboxapp.com/s/${id}">https://teraboxapp.com/s/${id}</a>
 
-  🎬 <b>Streaming Options</b>
-  • <a href="https://www.1024terabox.com/sharing/embed?surl=${id.slice(1)}&autoplay=true&mute=false">Stream Embedded Video</a>
-  • <a href="${watchlink}">Direct Watch Link</a>
+    🎬 <b>Streaming Options</b>
+    • <a href="https://www.1024terabox.com/sharing/embed?surl=${id.slice(1)}&autoplay=true&mute=false">Stream Embedded Video</a>
+    • <a href="${watchlink}">Direct Watch Link</a>
 
-  🌐 <b>Try our Website</b>
-  • <a href="https://iplogger.com/terasop">www.terabox.tech</a>
+    🌐 <b>Try our Website</b>
+    • <a href="https://iplogger.com/terasop">www.terabox.tech</a>
 
-  📢 <i>Join @sopbots for Updates</i>
-  `;
+    🎅 <b>Special Holiday Fun!</b>
+    • Kids can chat with Santa for free at https://santa.apped.me until Dec 25th!
+
+    📢 <i>Join @sopbots for Updates</i>
+    `;
 
     // bot.sendMessage(chatId, msg , { parse_mode: "HTML" });
     try {
