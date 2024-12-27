@@ -175,7 +175,7 @@ export async function downloadwithImage(url, chatId) {
     // );
     let msg = `
     📥 <b>File Details </b>
-    • <b>File Name:</b> ${getWebsiteTitle(url)}
+    • <b>File Name:</b> ${await getWebsiteTitle(url)}
 
     🔗 <b>Original Link:</b>
     • <a href="https://teraboxapp.com/s/${id}">https://teraboxapp.com/s/${id}</a>
