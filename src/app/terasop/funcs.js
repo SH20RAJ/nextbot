@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import TelegramBot from "node-telegram-bot-api";
 import CryptoJS from "crypto-js";
+import { getWebsiteTitle } from "./test";
 // import { main } from "./ping";
 
 const token = process.env.TERASOP;
@@ -173,7 +174,8 @@ export async function downloadwithImage(url, chatId) {
     //   "https://avatars.githubusercontent.com/u/66713844?v=4"
     // );
     let msg = `
-    📥 <b>File Details</b>
+    📥 <b>File Details </b>
+    • <b>File Name:</b> ${getWebsiteTitle(url)}
 
     🔗 <b>Original Link:</b>
     • <a href="https://teraboxapp.com/s/${id}">https://teraboxapp.com/s/${id}</a>
